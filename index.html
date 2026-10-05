@@ -200,7 +200,7 @@ function go(type,btn,ev){const v=pick(type);if(!v){toast(S.videos.length?'已勾
   S.log.unshift({id:Date.now(),type,ts:Date.now(),mid:v.mid,vid:v.id});S.log=S.log.slice(0,400);save();Cloud.pushUser();setTimeout(()=>play(v),btn?180:0)}
 $$('[data-go]').forEach(b=>b.onclick=e=>go(b.dataset.go,b,e));
 /* views */
-function render(){if(cur==='members')rMembers();if(cur==='settings')rSettings();if(cur==='alarm')rAlarm();if(cur==='history')rHistory()}
+function render(){const f=document.activeElement;if(f&&/^(INPUT|SELECT|TEXTAREA)$/.test(f.tagName)&&$('#'+cur).contains(f))return;if(cur==='members')rMembers();if(cur==='settings')rSettings();if(cur==='alarm')rAlarm();if(cur==='history')rHistory()}
 /* background slideshow */
 const cu=u=>u.replace(/['"()\s]/g,c=>encodeURIComponent(c)),okU=u=>/^https?:\/\/\S+$/i.test(u);
 let bi=-1,bt,ly=0;
@@ -233,7 +233,7 @@ function settingsClick(e){const a=e.target.closest('[data-act]');if(!a)return;co
 /* cloud hooks (called by the Firebase module) */
 function applyCfg(c){const o=JSON.stringify([S.members,S.videos,S.bgs]),ob=JSON.stringify(S.bgs);S.members=c.members||[];S.videos=c.videos||[];S.bgs=c.bgs||[];if(JSON.stringify([S.members,S.videos,S.bgs])===o)return;save();if(JSON.stringify(S.bgs)!==ob)bgStart();render()}
 function applyUser(d){const r=d||{},m=new Map();[...(r.log||[]),...S.log].forEach(l=>m.set(l.id,l));const log=[...m.values()].sort((a,b)=>b.ts-a.ts).slice(0,400);
-  S.log=log;if(r.alarm)S.alarm=r.alarm;if(r.off)S.off=r.off;if(r.goal)S.goal=r.goal;save();if(!d||JSON.stringify(log)!==JSON.stringify(r.log||[]))Cloud.pushUser();render()}
+  S.log=log;if(r.alarm)S.alarm=r.alarm;if(r.off)S.off=r.off;if(r.goal)S.goal=r.goal;save();const rl=r.log||[];if(!d||log.length!==rl.length||log.some((l,i)=>l.id!==rl[i].id))Cloud.pushUser();render()}
 function acctRender(){const b=$('#acct'),u=Cloud.user;b.hidden=Cloud.off;b.classList.toggle('av',!!u);b.innerHTML=u?(u.photoURL?`<img src="${esc(u.photoURL)}" alt="" referrerpolicy="no-referrer">`:esc((u.displayName||u.email||'?')[0].toUpperCase())):'Google 登入'}
 const priv=$('#priv'),privOpen=()=>{priv.classList.add('on');setTimeout(()=>$('#pOk').focus(),300)},privClose=()=>priv.classList.remove('on');
 $('#pNo').onclick=privClose;$('#pOk').onclick=()=>{privClose();Cloud.login&&Cloud.login()};
@@ -332,4 +332,3 @@ if(C.firebase.apiKey&&!C.firebase.apiKey.startsWith('YOUR')){
 </script>
 </body>
 </html>
-
