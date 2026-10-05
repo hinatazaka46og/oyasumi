@@ -15,12 +15,12 @@
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101317;--ink:#E9ECEF;--mute:#8A94A0;--line:rgba(233,236,239,.1);--glass:rgba(28,33,40,.6);--mist:#232A33;--blue:#6C8299;--sh:0 1px 1px rgba(0,0,0,.3),0 12px 32px -8px rgba(0,0,0,.5)}}
 :root[data-theme="dark"]{--bg:#101317;--ink:#E9ECEF;--mute:#8A94A0;--line:rgba(233,236,239,.1);--glass:rgba(28,33,40,.6);--mist:#232A33;--blue:#6C8299;--sh:0 1px 1px rgba(0,0,0,.3),0 12px 32px -8px rgba(0,0,0,.5)}
 *,*::before,*::after{box-sizing:inherit;-webkit-tap-highlight-color:transparent}
-html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+html{height:100%;overscroll-behavior:none;scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 :focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:8px}
 #haze{position:fixed;inset:0;pointer-events:none;background:radial-gradient(60% 40% at 80% 0%,var(--mist),transparent 70%),radial-gradient(50% 40% at 0% 100%,var(--mist),transparent 70%);opacity:.7}
-.view{position:absolute;inset:0;padding:max(28px,env(safe-area-inset-top)) 24px 118px;overflow-y:auto;opacity:0;transform:translateY(24px) scale(.985);pointer-events:none;transition:opacity .45s var(--out),transform .7s var(--sp)}
+.view{overscroll-behavior-y:contain;position:absolute;inset:0;padding:max(28px,env(safe-area-inset-top)) 24px 118px;overflow-y:auto;opacity:0;transform:translateY(24px) scale(.985);pointer-events:none;transition:opacity .45s var(--out),transform .7s var(--sp)}
 .view.on{opacity:1;transform:none;pointer-events:auto}
 .wrap{max-width:560px;margin:0 auto}
 h2{font:500 28px/1.3 var(--serif);letter-spacing:.12em;margin:8px 0 4px}
@@ -55,7 +55,7 @@ h2{font:500 28px/1.3 var(--serif);letter-spacing:.12em;margin:8px 0 4px}
 .th{position:relative;aspect-ratio:3/4;border-radius:12px;background:var(--mist) center/cover}
 .th button{position:absolute;top:6px;right:6px;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;transition:transform .5s var(--sp)}.th button:active{transform:scale(.8)}
 .chip .t{width:auto;height:auto;color:var(--ink);text-align:left}
-#acct{position:fixed;top:max(14px,env(safe-area-inset-top));right:16px;z-index:6;height:36px;min-width:36px;padding:0 14px;border-radius:99px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:var(--sh);font-size:12px;letter-spacing:.12em;overflow:hidden;transition:transform .5s var(--sp)}
+#acct{position:fixed;transform:translateZ(0);will-change:transform;top:max(14px,env(safe-area-inset-top));right:16px;z-index:6;height:36px;min-width:36px;padding:0 14px;border-radius:99px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:var(--sh);font-size:12px;letter-spacing:.12em;overflow:hidden;transition:transform .5s var(--sp)}
 #acct:active{transform:scale(.88)}#acct.av{padding:0;width:36px}#acct img{width:100%;height:100%;object-fit:cover;display:block}
 .flt{display:flex;gap:8px;margin-bottom:14px}.flt select{flex:1;min-width:0;appearance:none;-webkit-appearance:none;padding-right:32px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%237C8794' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
 .stat b small{font:400 13px var(--sans);color:var(--mute);margin-left:3px}
@@ -148,12 +148,11 @@ const ZEN_CONFIG={
   </div>
 </section>
 <section class="view" id="members"><div class="wrap" id="mBody"></div></section>
-<section class="view" id="alarm"><div class="wrap" id="aBody"></div></section>
 <section class="view" id="history"><div class="wrap" id="hBody"></div></section>
 </main>
 
 <nav id="nav" aria-label="主導航"><span id="pill"></span>
-  <button data-v="home" class="on">首頁</button><button data-v="members">成員</button><button data-v="alarm">鬧鐘</button><button data-v="history">歷史</button>
+  <button data-v="home" class="on">首頁</button><button data-v="members">成員</button><button data-v="history">歷史</button>
 </nav>
 
 <div id="player" aria-label="影片播放器"><video id="vid" playsinline autoplay></video><button id="back" aria-label="返回首頁">✕</button></div>
@@ -173,15 +172,16 @@ const Cloud={user:null,admin:false,off:true,pushUser(){},pushCfg(){}};
 const PRESET={members:[{id:'m1',name:'成員 A',on:true},{id:'m2',name:'成員 B',on:true},{id:'m3',name:'成員 C',on:true}],
  videos:[/* {id:'v1',mid:'m1',period:'wake',name:'標題',url:'https://…/a.mp4'} */],
  bgs:[/* 'https://…/photo1.jpg' */]};
-let S={...PRESET,alarm:{sleep:'23:00',wake:'07:00',sleepOn:false,wakeOn:false},log:[],off:[],goal:7};
+let S={...PRESET,log:[],off:[],goal:7};
 try{const x=JSON.parse(localStorage.getItem('zen-ritual'));if(x)S={...S,...x}}catch(e){}
 const isOn=m=>!S.off.includes(m.id);
+const dedupe=L=>{const m=new Map();L.slice().sort((a,b)=>a.ts-b.ts).forEach(l=>m.set(dkey(new Date(l.ts))+l.type,l));return[...m.values()].sort((a,b)=>b.ts-a.ts)};S.log=dedupe(S.log);
 const save=()=>{try{localStorage.setItem('zen-ritual',JSON.stringify(S))}catch(e){}};
 /* toast */
 let tt;const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)};
 /* clock */
 const W=['日','一','二','三','四','五','六'];
-function tick(){const d=new Date();$('#clk').innerHTML=`${pad(d.getHours())}<i style="opacity:${d.getSeconds()%2?.25:1}">:</i>${pad(d.getMinutes())}`;$('#sec').textContent=pad(d.getSeconds());$('#dt').textContent=`${d.getFullYear()}．${pad(d.getMonth()+1)}．${pad(d.getDate())}　週${W[d.getDay()]}`;checkAlarm(d)}
+function tick(){const d=new Date();$('#clk').innerHTML=`${pad(d.getHours())}<i style="opacity:${d.getSeconds()%2?.25:1}">:</i>${pad(d.getMinutes())}`;$('#sec').textContent=pad(d.getSeconds());$('#dt').textContent=`${d.getFullYear()}．${pad(d.getMonth()+1)}．${pad(d.getDate())}　週${W[d.getDay()]}`}
 /* nav */
 let cur='home';
 function pill(){const b=$(`nav [data-v="${cur}"]`),p=$('#pill');p.style.width=b.offsetWidth+'px';p.style.transform=`translateX(${b.offsetLeft-6}px)`}
@@ -197,10 +197,10 @@ addEventListener('keydown',e=>{if(e.key==='Escape')stop()});
 function pick(type){const on=new Set(S.members.filter(isOn).map(m=>m.id));const pool=S.videos.filter(v=>on.has(v.mid)&&(v.period===type||v.period==='any'));if(!pool.length)return null;return pool[Math.floor(Math.random()*pool.length)]}
 function go(type,btn,ev){const v=pick(type);if(!v){toast(S.videos.length?'已勾選的成員沒有符合時段的影片':'先到「設定」頁加入影片');return}
   if(btn&&ev){const r=btn.getBoundingClientRect(),s=Math.max(r.width,r.height)*2,i=document.createElement('i');i.className='ripple';i.style.cssText=`width:${s}px;height:${s}px;left:${ev.clientX-r.left-s/2}px;top:${ev.clientY-r.top-s/2}px`;btn.appendChild(i)}
-  S.log.unshift({id:Date.now(),type,ts:Date.now(),mid:v.mid,vid:v.id});S.log=S.log.slice(0,400);save();Cloud.pushUser();setTimeout(()=>play(v),btn?180:0)}
+  S.log=dedupe([{id:Date.now(),type,ts:Date.now(),mid:v.mid,vid:v.id},...S.log]).slice(0,400);save();Cloud.pushUser();setTimeout(()=>play(v),btn?180:0)}
 $$('[data-go]').forEach(b=>b.onclick=e=>go(b.dataset.go,b,e));
 /* views */
-function render(){const f=document.activeElement;if(f&&/^(INPUT|SELECT|TEXTAREA)$/.test(f.tagName)&&$('#'+cur).contains(f))return;if(cur==='members')rMembers();if(cur==='settings')rSettings();if(cur==='alarm')rAlarm();if(cur==='history')rHistory()}
+function render(){const f=document.activeElement;if(f&&/^(INPUT|SELECT|TEXTAREA)$/.test(f.tagName)&&$('#'+cur).contains(f))return;if(cur==='members')rMembers();if(cur==='settings')rSettings();if(cur==='history')rHistory()}
 /* background slideshow */
 const cu=u=>u.replace(/['"()\s]/g,c=>encodeURIComponent(c)),okU=u=>/^https?:\/\/\S+$/i.test(u);
 let bi=-1,bt,ly=0;
@@ -232,8 +232,8 @@ function settingsClick(e){const a=e.target.closest('[data-act]');if(!a)return;co
   else if(act==='rmb'){S.bgs.splice(+a.dataset.i,1);cfgSave();bgStart()}};
 /* cloud hooks (called by the Firebase module) */
 function applyCfg(c){const o=JSON.stringify([S.members,S.videos,S.bgs]),ob=JSON.stringify(S.bgs);S.members=c.members||[];S.videos=c.videos||[];S.bgs=c.bgs||[];if(JSON.stringify([S.members,S.videos,S.bgs])===o)return;save();if(JSON.stringify(S.bgs)!==ob)bgStart();render()}
-function applyUser(d){const r=d||{},m=new Map();[...(r.log||[]),...S.log].forEach(l=>m.set(l.id,l));const log=[...m.values()].sort((a,b)=>b.ts-a.ts).slice(0,400);
-  S.log=log;if(r.alarm)S.alarm=r.alarm;if(r.off)S.off=r.off;if(r.goal)S.goal=r.goal;save();const rl=r.log||[];if(!d||log.length!==rl.length||log.some((l,i)=>l.id!==rl[i].id))Cloud.pushUser();render()}
+function applyUser(d){const r=d||{},m=new Map();[...(r.log||[]),...S.log].forEach(l=>m.set(l.id,l));const log=dedupe([...m.values()]).slice(0,400);
+  S.log=log;if(r.off)S.off=r.off;if(r.goal)S.goal=r.goal;save();const rl=r.log||[];if(!d||log.length!==rl.length||log.some((l,i)=>l.id!==rl[i].id))Cloud.pushUser();render()}
 function acctRender(){const b=$('#acct'),u=Cloud.user;b.hidden=Cloud.off;b.classList.toggle('av',!!u);b.innerHTML=u?(u.photoURL?`<img src="${esc(u.photoURL)}" alt="" referrerpolicy="no-referrer">`:esc((u.displayName||u.email||'?')[0].toUpperCase())):'Google 登入'}
 const priv=$('#priv'),privOpen=()=>{priv.classList.add('on');setTimeout(()=>$('#pOk').focus(),300)},privClose=()=>priv.classList.remove('on');
 $('#pNo').onclick=privClose;$('#pOk').onclick=()=>{privClose();Cloud.login&&Cloud.login()};
@@ -243,25 +243,6 @@ function onAuth(){const a=Cloud.admin;let b=$('nav [data-v="settings"]'),sec=$('
   if(a&&!b){b=document.createElement('button');b.dataset.v='settings';b.textContent='設定';$('#nav').appendChild(b);sec=document.createElement('section');sec.className='view';sec.id='settings';sec.innerHTML='<div class="wrap" id="sBody"></div>';$('main').appendChild(sec);$('#sBody').onclick=settingsClick}
   if(!a&&b){b.remove();sec.remove();if(cur==='settings')show('home')}
   acctRender();pill();render()}
-/* alarm */
-let deferred=null;
-addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;if(cur==='alarm')rAlarm()});
-function rAlarm(){const A=S.alarm,perm='Notification'in window?Notification.permission:'unsupported';
-  const row=(k,t,d)=>`<div class="card"><div class="row"><div><div class="name">${t}</div><div class="meta">${d}</div></div><button class="sw ${A[k+'On']?'on':''}" data-k="${k}" role="switch" aria-checked="${A[k+'On']}" aria-label="${t}"></button></div><div class="tools"><input type="time" value="${A[k]}" data-t="${k}" aria-label="${t}時間"></div></div>`;
-  $('#aBody').innerHTML=`<h2>鬧鐘</h2><p class="sub">時間到時發出通知，點開即可回到這裡。</p>${row('sleep','就寢提醒','提醒你該準備睡覺了')}${row('wake','早安鬧鐘','起床時間到了')}
-  <div class="card"><div class="name">通知權限</div><div class="meta">${perm==='granted'?'已開啟':perm==='denied'?'已被瀏覽器封鎖，請到網站設定開啟':perm==='unsupported'?'此瀏覽器不支援通知':'尚未開啟'}</div><div class="tools">${perm==='default'?'<button class="btn dark" data-p="1">開啟通知</button>':''}<button class="btn" data-test="1">測試通知</button></div></div>
-  <div class="card"><div class="name">加入主畫面</div><p class="hint">iPhone：Safari 點分享 → 加入主畫面。<br>Android：Chrome 選單 → 安裝應用程式。<br>網頁需保持開啟，才能準時送出提醒。</p>${deferred?'<div class="tools"><button class="btn dark" data-inst="1">立即安裝</button></div>':''}</div>
-  <div class="card"><div class="row"><div class="name">外觀</div><button class="btn" data-theme="1">切換深淺色</button></div></div>`}
-$('#aBody').onclick=async e=>{const t=e.target.closest('button');if(!t)return;
-  if(t.dataset.k){const k=t.dataset.k;S.alarm[k+'On']=!S.alarm[k+'On'];save();Cloud.pushUser();t.classList.toggle('on');if(S.alarm[k+'On']&&'Notification'in window&&Notification.permission==='default'){await Notification.requestPermission();rAlarm()}}
-  if(t.dataset.p){await Notification.requestPermission();rAlarm()}
-  if(t.dataset.test)notify('這是一則測試通知');
-  if(t.dataset.inst){deferred.prompt();deferred=null;rAlarm()}
-  if(t.dataset.theme){const r=document.documentElement,d=getComputedStyle(r).getPropertyValue('--bg').trim()==='#101317';r.dataset.theme=d?'light':'dark'}};
-$('#aBody').onchange=e=>{if(e.target.dataset.t){S.alarm[e.target.dataset.t]=e.target.value;save();Cloud.pushUser()}};
-function notify(m){if('Notification'in window&&Notification.permission==='granted'){try{new Notification('靜時',{body:m,tag:'zen'})}catch(e){}}toast(m)}
-let fired={};
-function checkAlarm(d){const hm=`${pad(d.getHours())}:${pad(d.getMinutes())}`,k=dkey(d);for(const t of['sleep','wake']){if(S.alarm[t+'On']&&S.alarm[t]===hm&&fired[t]!==k+hm){fired[t]=k+hm;notify(t==='sleep'?'該準備睡覺了':'起床時間到了')}}}
 /* history */
 function streak(){const days=new Set(S.log.map(l=>dkey(new Date(l.ts))));let d=new Date(),n=0;if(!days.has(dkey(d)))d.setDate(d.getDate()-1);while(days.has(dkey(d))){n++;d.setDate(d.getDate()-1)}return{n,days}}
 /* history & stats */
@@ -320,7 +301,7 @@ if(C.firebase.apiKey&&!C.firebase.apiKey.startsWith('YOUR')){
   Cloud.off=false;
   Cloud.login=async()=>{try{await signInWithPopup(auth,gp)}catch(e){if(['auth/popup-blocked','auth/operation-not-supported-in-this-environment'].includes(e.code))signInWithRedirect(auth,gp);else if(!['auth/popup-closed-by-user','auth/cancelled-popup-request'].includes(e.code))toast('登入失敗：'+e.code)}};
   Cloud.logout=()=>signOut(auth);
-  Cloud.pushUser=()=>{if(Cloud.user)setDoc(doc(db,'users',Cloud.user.uid),{log:S.log,alarm:S.alarm,off:S.off,goal:S.goal,t:Date.now()}).catch(()=>toast('同步失敗，請稍後再試'))};
+  Cloud.pushUser=()=>{if(Cloud.user)setDoc(doc(db,'users',Cloud.user.uid),{log:S.log,off:S.off,goal:S.goal,t:Date.now()}).catch(()=>toast('同步失敗，請稍後再試'))};
   Cloud.pushCfg=()=>{if(Cloud.admin)setDoc(doc(db,'config','main'),{members:S.members,videos:S.videos,bgs:S.bgs,t:Date.now()}).catch(()=>toast('儲存失敗，請確認 Firestore 規則'))};
   onSnapshot(doc(db,'config','main'),sn=>{if(sn.exists())applyCfg(sn.data())},e=>console.warn(e));
   let un=null;
