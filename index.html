@@ -294,21 +294,24 @@ tick();setInterval(tick,1000);pill();bgStart();acctRender();document.fonts&&docu
 <script type="module">
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import {getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,signOut} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
-import {getFirestore,doc,onSnapshot,setDoc} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+import {getFirestore,doc,getDoc,setDoc} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 const C=ZEN_CONFIG;
 if(C.firebase.apiKey&&!C.firebase.apiKey.startsWith('YOUR')){
   const app=initializeApp(C.firebase),auth=getAuth(app),db=getFirestore(app),gp=new GoogleAuthProvider();gp.setCustomParameters({prompt:'select_account'});
   Cloud.off=false;
   Cloud.login=async()=>{try{await signInWithPopup(auth,gp)}catch(e){if(['auth/popup-blocked','auth/operation-not-supported-in-this-environment'].includes(e.code))signInWithRedirect(auth,gp);else if(!['auth/popup-closed-by-user','auth/cancelled-popup-request'].includes(e.code))toast('登入失敗：'+e.code)}};
   Cloud.logout=()=>signOut(auth);
-  Cloud.pushUser=()=>{if(Cloud.user)setDoc(doc(db,'users',Cloud.user.uid),{log:S.log,off:S.off,goal:S.goal,t:Date.now()}).catch(()=>toast('同步失敗，請稍後再試'))};
-  Cloud.pushCfg=()=>{if(Cloud.admin)setDoc(doc(db,'config','main'),{members:S.members,videos:S.videos,bgs:S.bgs,t:Date.now()}).catch(()=>toast('儲存失敗，請確認 Firestore 規則'))};
-  onSnapshot(doc(db,'config','main'),sn=>{if(sn.exists())applyCfg(sn.data())},e=>console.warn(e));
-  let un=null;
-  onAuthStateChanged(auth,u=>{un&&un();un=null;if(!u&&Cloud.user){S.log=[];S.off=[];save()}
+  let dead=false,tmr=null,last='';
+  const fail=e=>{console.warn(e);last='';if(e&&e.code==='resource-exhausted'){if(!dead){dead=true;toast('雲端今日用量已滿，暫時只存在本機')}}else toast('同步失敗，請稍後再試')};
+  Cloud.pushUser=()=>{if(!Cloud.user||dead)return;clearTimeout(tmr);tmr=setTimeout(()=>{const sig=JSON.stringify([S.log.map(l=>l.id),S.off,S.goal]);if(sig===last)return;last=sig;setDoc(doc(db,'users',Cloud.user.uid),{log:S.log,off:S.off,goal:S.goal,t:Date.now()}).catch(fail)},2000)};
+  Cloud.pushCfg=()=>{if(Cloud.admin&&!dead)setDoc(doc(db,'config','main'),{members:S.members,videos:S.videos,bgs:S.bgs,t:Date.now()}).catch(fail)};
+  const loadCfg=()=>getDoc(doc(db,'config','main')).then(sn=>{if(sn.exists())applyCfg(sn.data())}).catch(e=>console.warn(e));
+  const loadUser=()=>Cloud.user&&getDoc(doc(db,'users',Cloud.user.uid)).then(sn=>applyUser(sn.exists()?sn.data():null)).catch(e=>console.warn(e));
+  loadCfg();let lt=Date.now();
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&Date.now()-lt>120000){lt=Date.now();loadCfg();loadUser()}});
+  onAuthStateChanged(auth,u=>{if(!u&&Cloud.user){S.log=[];S.off=[];save();last=''}
     Cloud.user=u;Cloud.admin=!!u&&u.emailVerified===true&&(u.email||'').toLowerCase()===C.adminEmail.toLowerCase();
-    if(u)un=onSnapshot(doc(db,'users',u.uid),sn=>applyUser(sn.exists()?sn.data():null),e=>console.warn(e));
-    onAuth()});
+    onAuth();loadUser()});
 }
 </script>
 </body>
