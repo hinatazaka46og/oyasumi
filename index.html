@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta name="referrer" content="no-referrer">
@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F5F7FA">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>靜時 ・ 作息打卡</title>
+<title>oyasumi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
@@ -63,14 +63,14 @@ h2{font:500 28px/1.3 var(--serif);letter-spacing:.12em;margin:8px 0 4px}
 .rl{display:flex;align-items:center;gap:14px}.dot{width:10px;height:10px;border-radius:50%;flex:none;border:1px solid var(--mute);box-sizing:border-box}
 .dot.ok{background:#7FA38F;border:0;box-shadow:0 0 0 4px rgba(127,163,143,.2)}.dot.lo{background:#C9A57A;border:0;box-shadow:0 0 0 4px rgba(201,165,122,.2)}
 .hv{font:500 18px var(--serif);letter-spacing:.04em}.lg{display:flex;gap:16px;justify-content:center;margin:18px 0 14px;font-size:12px;color:var(--mute)}.lg .dot{display:inline-block;margin-right:6px;vertical-align:-1px}
-#priv,#fix{position:fixed;inset:0;z-index:25;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--veil);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);opacity:0;visibility:hidden;transition:opacity .45s var(--out),visibility 0s .45s}
-#priv.on,#fix.on{opacity:1;visibility:visible;transition:opacity .45s var(--out)}
-#priv .box,#fix .box{width:min(100%,380px);padding:34px 28px 26px;border-radius:28px;background:var(--glass);border:1px solid var(--line);box-shadow:var(--sh);transform:translateY(36px) scale(.94);transition:transform .8s var(--sp)}
-#priv.on .box,#fix.on .box{transform:none}
-#priv h3,#fix h3{font:500 20px/1.5 var(--serif);letter-spacing:.14em;margin:0 0 14px}
-#priv p,#fix p{font-size:13.5px;line-height:2;color:var(--mute);margin:0 0 14px}
+#priv,#fix,#acc{position:fixed;inset:0;z-index:25;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--veil);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);opacity:0;visibility:hidden;transition:opacity .45s var(--out),visibility 0s .45s}
+#priv.on,#fix,#acc.on{opacity:1;visibility:visible;transition:opacity .45s var(--out)}
+#priv .box,#fix,#acc .box{width:min(100%,380px);padding:34px 28px 26px;border-radius:28px;background:var(--glass);border:1px solid var(--line);box-shadow:var(--sh);transform:translateY(36px) scale(.94);transition:transform .8s var(--sp)}
+#priv.on .box,#fix,#acc.on .box{transform:none}
+#priv h3,#fix,#acc h3{font:500 20px/1.5 var(--serif);letter-spacing:.14em;margin:0 0 14px}
+#priv p,#fix,#acc p{font-size:13.5px;line-height:2;color:var(--mute);margin:0 0 14px}
 #priv .pr{display:flex;gap:16px;font-size:13px;line-height:1.8;padding:11px 0;border-top:1px solid var(--line)}#priv .pr span{flex:none;width:3.2em;letter-spacing:.14em;color:var(--mute)}
-#priv .tools,#fix .tools{margin-top:22px}#priv .btn,#fix .btn{flex:1;padding:13px 16px}
+#priv .tools,#fix,#acc .tools{margin-top:22px}#priv .btn,#fix,#acc .btn{flex:1;padding:13px 16px}
 .mav{width:44px;height:44px;border-radius:50%;background:var(--mist) center/cover;display:grid;place-items:center;font:500 16px var(--serif);color:var(--mute);flex:none}.lft{display:flex;align-items:center;gap:14px}
 .ev{height:0;margin:-34px 0 34px;text-align:center;font-size:12.5px;letter-spacing:.18em;color:var(--mute)}
 #acct{transition:transform .5s var(--sp),opacity .35s ease}#acct.hide{opacity:0;pointer-events:none}
@@ -145,8 +145,8 @@ input[type=time]{font-family:var(--serif);font-size:22px;padding:6px 14px}
 <script>
 /* ===== 部署前請填寫 ===== */
 const ZEN_CONFIG={
-  eventsCsv:'https://docs.google.com/spreadsheets/d/e/2PACX-1vQF6fcGnEfe1keSPJT7jn885gq-4ktCzZyM5ksd5SkU31M6tVXsgnuI61_Av0H_yx-TYmX_mXMd8eLm/pub?gid=125717504&single=true&output=csv',    // 紀念日試算表「發布到網路」的 CSV 網址
-  birthdaysCsv:'https://docs.google.com/spreadsheets/d/e/2PACX-1vQF6fcGnEfe1keSPJT7jn885gq-4ktCzZyM5ksd5SkU31M6tVXsgnuI61_Av0H_yx-TYmX_mXMd8eLm/pub?gid=727122305&single=true&output=csv', // 生日試算表「發布到網路」的 CSV 網址
+  eventsCsv:'',    // 紀念日試算表「發布到網路」的 CSV 網址
+  birthdaysCsv:'', // 生日試算表「發布到網路」的 CSV 網址
   focusName:'加藤史帆', // 這位的生日會提前 30 天倒數，其他只在當天顯示
   adminEmail:'tingcohoshi@gmail.com', // 唯一能看到「設定」分頁的管理者 Google 信箱
   firebase:{apiKey:'AIzaSyBXQxKqix2Ac21K-47dYyXDLJ_9DAOotu4',authDomain:'oyasumi-9f934.firebaseapp.com',projectId:'oyasumi-9f934',appId:'1:934418045766:web:66e99728309c7ffd0a2347'}
@@ -154,7 +154,6 @@ const ZEN_CONFIG={
 </script>
 <div id="haze"></div>
 <div id="bg"><i></i><i></i><div id="veil"></div><div id="frame"></div></div>
-
 
 <main>
 <section class="view on" id="home">
@@ -172,11 +171,9 @@ const ZEN_CONFIG={
 <section class="view" id="history"><div class="wrap" id="hBody"></div></section>
 </main>
 
-
 <nav id="nav" aria-label="主導航"><span id="pill"></span>
   <button data-v="home" class="on">首頁</button><button data-v="members">成員</button><button data-v="history">歷史</button>
 </nav>
-
 
 <div id="player" aria-label="影片播放器"><video id="vid" playsinline autoplay></video><button id="back" aria-label="返回首頁">✕</button></div>
 <div id="priv" role="dialog" aria-modal="true" aria-labelledby="ptt"><div class="box"><h3 id="ptt">隱私權與資料同步說明</h3>
@@ -184,9 +181,9 @@ const ZEN_CONFIG={
 <div class="pr"><span>取用</span><div>Email、名稱、頭貼</div></div><div class="pr"><span>儲存</span><div>Firestore 中的睡眠與打卡紀錄，讓你換裝置也看得到</div></div>
 <div class="tools"><button class="btn" id="pNo">取消</button><button class="btn dark" id="pOk">同意並登入</button></div></div></div>
 <div id="fix" role="dialog" aria-modal="true" aria-labelledby="ftt"><div class="box"><h3 id="ftt">補打卡</h3><p>填入實際的時間。清空欄位再儲存，會刪除該筆紀錄。</p><label class="fl">🌙 晚安<input type="datetime-local" id="fs"></label><label class="fl">☀️ 早安<input type="datetime-local" id="fw"></label><div class="tools"><button class="btn" id="fNo">取消</button><button class="btn dark" id="fOk">儲存</button></div></div></div>
+<div id="acc" role="dialog" aria-modal="true" aria-labelledby="atl"><div class="box"><h3 id="atl">帳號</h3><p id="accMail" style="margin-bottom:10px"></p><p>刪除後，雲端上你的睡眠與打卡紀錄與登入帳號會被永久移除，無法復原。共用的影片與背景不受影響。</p><div class="tools"><button class="btn" id="accNo">關閉</button><button class="btn dark" id="accOut">登出</button></div><button class="btn" id="accDel" style="width:100%;margin-top:10px;color:#B5655C">刪除我的資料與帳號</button></div></div>
 <button id="acct" hidden aria-label="帳號"></button>
 <div id="toast" role="status"></div>
-
 
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -206,7 +203,7 @@ const save=()=>{try{localStorage.setItem('zen-ritual',JSON.stringify(S))}catch(e
 let tt;const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)};
 /* clock */
 const W=['日','一','二','三','四','五','六'];
-function tick(){const d=new Date();$('#clk').innerHTML=`${pad(d.getHours())}<i style="opacity:${d.getSeconds()%2?.25:1}">:</i>${pad(d.getMinutes())}`;$('#sec').textContent=pad(d.getSeconds());$('#dt').textContent=`${d.getFullYear()}．${pad(d.getMonth()+1)}．${pad(d.getDate())} 週${W[d.getDay()]}`;if(dkey(d)!==lastD){lastD=dkey(d);evShow()}}
+function tick(){const d=new Date();$('#clk').innerHTML=`${pad(d.getHours())}<i style="opacity:${d.getSeconds()%2?.25:1}">:</i>${pad(d.getMinutes())}`;$('#sec').textContent=pad(d.getSeconds());$('#dt').textContent=`${d.getFullYear()}．${pad(d.getMonth()+1)}．${pad(d.getDate())}　週${W[d.getDay()]}`;if(dkey(d)!==lastD){lastD=dkey(d);evShow()}}
 let lastD='';
 let EV={ev:[],bd:[]},evL=[],evI=0,evT;
 try{EV=JSON.parse(localStorage.getItem('zen-ev'))||EV}catch(e){}
@@ -218,7 +215,7 @@ function evSet(L){const e=$('#ev');if(JSON.stringify(L)===JSON.stringify(evL))re
   if(L.length>1)evT=setInterval(()=>{e.style.opacity=0;setTimeout(()=>{evI=(evI+1)%evL.length;e.textContent=evL[evI];e.style.opacity=1},450)},4500)}
 function evShow(){const t=new Date(),Y=t.getFullYear(),M=t.getMonth()+1,D=t.getDate(),t0=new Date(Y,M-1,D),F=ZEN_CONFIG.focusName||'',T=[],C=[];
   EV.bd.forEach(b=>{const nm=b.n.includes('·')?b.n.split('·').pop().trim():b.n.replace(/^[^\p{L}\p{N}]+/u,'').trim();let n=new Date(Y,b.m-1,b.d);if(n<t0)n=new Date(Y+1,b.m-1,b.d);
-    const k=Math.round((n-t0)/864e5),txt=`${nm} ${n.getFullYear()-b.y}歲生日`;if(k===0)T.push(txt);else if(F&&nm.includes(F)&&k<=30)C.push(`${txt} 還有 ${k} 天`)});
+    const k=Math.round((n-t0)/864e5),txt=`${nm} ${n.getFullYear()-b.y}歲生日`;if(k===0)T.push(txt);else if(F&&nm.includes(F)&&k<=30)C.push(`${txt}　還有 ${k} 天`)});
   EV.ev.forEach(e=>{if(e.m===M&&e.d===D){const y=Y-e.y;T.push(y>0?`${e.n} ${y}週年`:e.n)}});
   evSet([...T,...C])}
 /* nav */
@@ -286,7 +283,11 @@ function acctRender(){const b=$('#acct'),u=Cloud.user;b.hidden=Cloud.off;b.class
 const priv=$('#priv'),privOpen=()=>{priv.classList.add('on');setTimeout(()=>$('#pOk').focus(),300)},privClose=()=>priv.classList.remove('on');
 $('#pNo').onclick=privClose;$('#pOk').onclick=()=>{privClose();Cloud.login&&Cloud.login()};
 priv.onclick=e=>{if(e.target===priv)privClose()};addEventListener('keydown',e=>{if(e.key==='Escape')privClose()});
-$('#acct').onclick=()=>{if(Cloud.user){if(confirm(`已登入 ${Cloud.user.email}，要登出嗎？`))Cloud.logout()}else privOpen()};
+const accClose=()=>$('#acc').classList.remove('on');
+$('#acct').onclick=()=>{if(Cloud.user){$('#accMail').textContent=Cloud.user.email;$('#acc').classList.add('on')}else privOpen()};
+$('#accNo').onclick=accClose;$('#acc').onclick=e=>{if(e.target.id==='acc')accClose()};
+$('#accOut').onclick=()=>{accClose();Cloud.logout()};
+$('#accDel').onclick=()=>{if(confirm('確定要永久刪除雲端上的紀錄與帳號嗎？此動作無法復原。')){accClose();Cloud.deleteAccount&&Cloud.deleteAccount()}};
 function onAuth(){const a=Cloud.admin;let b=$('nav [data-v="settings"]'),sec=$('#settings');
   if(a&&!b){b=document.createElement('button');b.dataset.v='settings';b.textContent='設定';$('#nav').appendChild(b);sec=document.createElement('section');sec.className='view';sec.id='settings';sec.innerHTML='<div class="wrap" id="sBody"></div>';$('main').appendChild(sec);$('#sBody').onclick=settingsClick;$('#sBody').oninput=settingsInput}
   if(!a&&b){b.remove();sec.remove();if(cur==='settings')show('home')}
@@ -322,8 +323,8 @@ function hUpdate(){const D=hData();
   [['k1','u1',D.avg,1],['k2','u2',D.total,0],['k3','u3',D.rate,0]].forEach(([k,u,x,d])=>{const e=$('#'+k);$('#'+u).hidden=x==null;x==null?e.textContent='—':countUp(e,x,d)});
   drawChart(D.rows);
   $('#hl').innerHTML=D.rows.length?D.rows.map(d=>{const dt=new Date(d.k+'T00:00:00'),pl=d.logs.find(l=>S.videos.some(x=>x.id===l.vid)),st=d.h==null?'':tc(d.h),
-    t=d.s&&d.w?`${hm(d.s.ts)} → ${hm(d.w.ts)}`:d.logs.slice().reverse().map(l=>(l.type==='wake'?'☀️ ':'🌙 ')+hm(l.ts)).join(' ');
-    return`<div class="rec" role="button" tabindex="0" data-id="${pl?pl.id:''}" data-k="${d.k}"><div class="rl"><i class="dot ${st}"></i><div><b>${dt.getMonth()+1}月${dt.getDate()}日 週${W[dt.getDay()]}</b><br><small>${t}</small></div></div><span class="rr"><span class="hv">${d.h!=null?d.h.toFixed(1)+'h':'—'}</span><button class="ed" aria-label="編輯時間">✎</button></span></div>`}).join(''):'<div class="empty">此區間沒有紀錄<br>回到首頁，打下第一個卡。</div>'}
+    t=d.s&&d.w?`${hm(d.s.ts)} → ${hm(d.w.ts)}`:d.logs.slice().reverse().map(l=>(l.type==='wake'?'☀️ ':'🌙 ')+hm(l.ts)).join('　');
+    return`<div class="rec" role="button" tabindex="0" data-id="${pl?pl.id:''}" data-k="${d.k}"><div class="rl"><i class="dot ${st}"></i><div><b>${dt.getMonth()+1}月${dt.getDate()}日　週${W[dt.getDay()]}</b><br><small>${t}</small></div></div><span class="rr"><span class="hv">${d.h!=null?d.h.toFixed(1)+'h':'—'}</span><button class="ed" aria-label="編輯時間">✎</button></span></div>`}).join(''):'<div class="empty">此區間沒有紀錄<br>回到首頁，打下第一個卡。</div>'}
 function rHistory(){hc&&(hc.destroy(),hc=null);const ys=[...new Set([new Date().getFullYear(),...S.log.map(l=>new Date(l.ts).getFullYear())])].sort((a,b)=>b-a);if(!ys.includes(H.y))H.y=ys[0];
   const{n,days}=streak(),sh=new Map();sessions().forEach(x=>{if(!sh.has(x.day)||x.h>sh.get(x.day))sh.set(x.day,x.h)});
   const used=new Map();sessions().forEach(x=>used.set(x.s.id,x.day));
@@ -351,15 +352,15 @@ $('#fOk').onclick=()=>{const now=Date.now(),v=[['sleep',fixO.s],['wake',fixO.w]]
 $('#hBody').onclick=e=>{if(e.target.closest('#addfix'))return fixOpen(null);const ed=e.target.closest('.ed');if(ed)return fixOpen(ed.closest('.rec').dataset.k);const b=e.target.closest('.rec');if(!b)return;const l=S.log.find(x=>String(x.id)===b.dataset.id),v=l&&S.videos.find(x=>x.id===l.vid);v?play(v):toast('這支影片已被刪除')};
 document.addEventListener('scroll',e=>{const t=e.target;if(t&&t.classList&&t.classList.contains('view'))$('#acct').classList.toggle('hide',t.scrollTop>12)},true);
 /* PWA */
-(function(){const m={name:'靜時',short_name:'靜時',start_url:'.',display:'standalone',background_color:'#F5F7FA',theme_color:'#F5F7FA',icons:[{src:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#F5F7FA"/><circle cx="256" cy="256" r="120" fill="#1A1A1A"/></svg>'),sizes:'512x512',type:'image/svg+xml'}]};
+(function(){const m={name:'oyasumi',short_name:'oyasumi',start_url:'.',display:'standalone',background_color:'#F5F7FA',theme_color:'#F5F7FA',icons:[{src:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#F5F7FA"/><circle cx="256" cy="256" r="120" fill="#1A1A1A"/></svg>'),sizes:'512x512',type:'image/svg+xml'}]};
   const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(m)],{type:'application/manifest+json'}));document.head.appendChild(l);
   if('serviceWorker'in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}})();
 tick();evShow();loadSheets();setInterval(tick,1000);pill();bgStart();acctRender();document.fonts&&document.fonts.ready.then(pill);
 </script>
 <script type="module">
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import {getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,signOut} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
-import {getFirestore,doc,getDoc,setDoc} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+import {getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,signOut,deleteUser} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import {getFirestore,doc,getDoc,setDoc,deleteDoc} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 const C=ZEN_CONFIG;
 if(C.firebase.apiKey&&!C.firebase.apiKey.startsWith('YOUR')){
   const app=initializeApp(C.firebase),auth=getAuth(app),db=getFirestore(app),gp=new GoogleAuthProvider();gp.setCustomParameters({prompt:'select_account'});
@@ -370,6 +371,9 @@ if(C.firebase.apiKey&&!C.firebase.apiKey.startsWith('YOUR')){
   const fail=e=>{console.warn(e);last='';if(e&&e.code==='resource-exhausted'){if(!dead){dead=true;toast('雲端今日用量已滿，暫時只存在本機')}}else toast('同步失敗，請稍後再試')};
   Cloud.pushUser=()=>{if(!Cloud.user||dead)return;clearTimeout(tmr);tmr=setTimeout(()=>{const sig=JSON.stringify([S.log.map(l=>l.id),S.off,S.goal]);if(sig===last)return;last=sig;setDoc(doc(db,'users',Cloud.user.uid),{log:S.log,off:S.off,goal:S.goal,t:Date.now()}).catch(fail)},2000)};
   Cloud.pushCfg=()=>{if(Cloud.admin&&!dead)setDoc(doc(db,'config','main'),{members:S.members,videos:S.videos,bgs:S.bgs,events:S.events||[],t:Date.now()}).catch(fail)};
+  Cloud.deleteAccount=async()=>{const u=auth.currentUser;if(!u)return;clearTimeout(tmr);
+    try{await deleteDoc(doc(db,'users',u.uid));S.log=[];S.off=[];save();last='';render();await deleteUser(u);toast('已刪除你的資料與帳號')}
+    catch(e){console.warn(e);toast(e.code==='auth/requires-recent-login'?'雲端紀錄已刪除。請登出後重新登入，再按一次以移除帳號':'刪除失敗：'+(e.code||'請稍後再試'))}};
   const loadCfg=()=>getDoc(doc(db,'config','main')).then(sn=>{if(sn.exists())applyCfg(sn.data())}).catch(e=>console.warn(e));
   const loadUser=()=>Cloud.user&&getDoc(doc(db,'users',Cloud.user.uid)).then(sn=>applyUser(sn.exists()?sn.data():null)).catch(e=>console.warn(e));
   loadCfg();let lt=Date.now();
