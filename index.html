@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta name="referrer" content="no-referrer">
@@ -62,7 +62,7 @@ h2{font:500 28px/1.3 var(--serif);letter-spacing:.12em;margin:8px 0 4px}
 .hcw{position:relative;height:210px;margin-top:14px}
 .rl{display:flex;align-items:center;gap:14px}.dot{width:10px;height:10px;border-radius:50%;flex:none;border:1px solid var(--mute);box-sizing:border-box}
 .dot.ok{background:#7FA38F;border:0;box-shadow:0 0 0 4px rgba(127,163,143,.2)}.dot.lo{background:#C9A57A;border:0;box-shadow:0 0 0 4px rgba(201,165,122,.2)}
-.hv{font:500 18px var(--serif);letter-spacing:.04em}.lg{display:flex;gap:16px;justify-content:center;margin:18px 0 14px;font-size:12px;color:var(--mute)}.lg .dot{display:inline-block;margin-right:6px;vertical-align:-1px}
+.hv{font:500 16px var(--serif);letter-spacing:.02em;margin-right:2px}.lg{display:flex;gap:16px;justify-content:center;margin:18px 0 14px;font-size:12px;color:var(--mute)}.lg .dot{display:inline-block;margin-right:6px;vertical-align:-1px}
 #priv,#fix,#acc{position:fixed;inset:0;z-index:25;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--veil);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);opacity:0;visibility:hidden;transition:opacity .45s var(--out),visibility 0s .45s}
 #priv.on,#fix.on,#acc.on{opacity:1;visibility:visible;transition:opacity .45s var(--out)}
 #priv .box,#fix .box,#acc .box{width:min(100%,380px);padding:34px 28px 26px;border-radius:28px;background:var(--glass);border:1px solid var(--line);box-shadow:var(--sh);transform:translateY(36px) scale(.94);transition:transform .8s var(--sp)}
@@ -87,7 +87,8 @@ h2{font:500 28px/1.3 var(--serif);letter-spacing:.12em;margin:8px 0 4px}
 .vr{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:13px}.vr:first-child{border-top:0}.vr .t{flex:1;min-width:0;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vr em{font-style:normal;color:var(--mute);font-size:12px}.vr .x{color:var(--mute);width:24px}
 summary{list-style:none;cursor:pointer}summary::-webkit-details-marker{display:none}
 .fl{display:flex;flex-direction:column;gap:6px;font-size:13px;margin-bottom:14px;color:var(--mute)}.fl input{width:100%;border-radius:16px;color:var(--ink)}
-.rec{cursor:pointer}.rr{display:flex;align-items:center;gap:6px}.ed{width:32px;height:32px;border-radius:50%;color:var(--mute);font-size:14px}
+.rr{display:flex;align-items:center;gap:4px;flex:none}.rl{min-width:0}.ed,.pb{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;padding:0;transition:transform .5s var(--sp)}.ed{color:var(--mute)}.ed:active,.pb:active{transform:scale(.86)}
+.pb.m{background:color-mix(in srgb,var(--blue) 24%,transparent);color:var(--ink)}.pb.w{background:color-mix(in srgb,var(--t2) 45%,transparent);color:var(--ink)}.pb.off{border:1px dashed var(--mute);color:var(--mute)}
 .gate{position:relative}.gate .pv{filter:blur(6px);opacity:.7;pointer-events:none;user-select:none;-webkit-user-select:none}.gate .gc{position:absolute;left:0;right:0;top:24px;text-align:left}
 /* nav */
 nav{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;gap:2px;padding:6px;border-radius:999px;background:var(--glass);backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);border:1px solid var(--line);box-shadow:var(--sh);z-index:5;width:min(92vw,400px)}
@@ -125,9 +126,9 @@ input[type=time]{font-family:var(--serif);font-size:22px;padding:6px 14px}
 .day.on i{background:var(--ink);transform:scale(1.08)}
 .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
 .badge{font-size:12px;padding:6px 14px;border-radius:99px;border:1px dashed var(--mute);color:var(--mute)}.badge.on{border:1px solid var(--ink);color:var(--ink)}
-.rec{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;padding:16px 20px;margin-bottom:10px;border-radius:18px;background:var(--glass);border:1px solid var(--line);transition:transform .5s var(--sp)}
+.rec{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;padding:14px 12px 14px 16px;margin-bottom:10px;border-radius:18px;background:var(--glass);border:1px solid var(--line);transition:transform .5s var(--sp)}
 .rec:active{transform:scale(.97)}
-.rec b{font:500 15px var(--serif);letter-spacing:.14em}.rec small{color:var(--mute);font-size:12px}
+.rec b{font:500 14px var(--serif);letter-spacing:.06em}.rec small{color:var(--mute);font-size:12px}
 .empty{text-align:center;color:var(--mute);font-size:13px;letter-spacing:.1em;padding:36px 0;line-height:2}
 .hint{font-size:12.5px;color:var(--mute);line-height:1.9;margin:10px 0 0}
 /* player */
@@ -156,7 +157,6 @@ const ZEN_CONFIG={
 <div id="haze"></div>
 <div id="bg"><i></i><i></i><div id="veil"></div><div id="frame"></div></div>
 
-
 <main>
 <section class="view on" id="home">
   <div class="wrap">
@@ -173,11 +173,9 @@ const ZEN_CONFIG={
 <section class="view" id="history"><div class="wrap" id="hBody"></div></section>
 </main>
 
-
 <nav id="nav" aria-label="主導航"><span id="pill"></span>
   <button data-v="home" class="on">首頁</button><button data-v="members">成員</button><button data-v="history">歷史</button>
 </nav>
-
 
 <div id="player" aria-label="影片播放器"><video id="vid" playsinline autoplay></video><button id="back" aria-label="返回首頁">✕</button></div>
 <div id="priv" role="dialog" aria-modal="true" aria-labelledby="ptt"><div class="box"><h3 id="ptt">隱私權與資料同步說明</h3>
@@ -188,7 +186,6 @@ const ZEN_CONFIG={
 <div id="acc" role="dialog" aria-modal="true" aria-labelledby="atl"><div class="box"><h3 id="atl">帳號</h3><p id="accMail" style="margin-bottom:10px"></p><p>刪除後，雲端上你的睡眠與打卡紀錄與登入帳號會被永久移除，無法復原。共用的影片與背景不受影響。</p><div class="tools"><button class="btn" id="accNo">關閉</button><button class="btn dark" id="accOut">登出</button></div><button class="btn" id="accDel" style="width:100%;margin-top:10px;color:#B5655C">刪除我的資料與帳號</button></div></div>
 <button id="acct" hidden aria-label="帳號"></button>
 <div id="toast" role="status"></div>
-
 
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -208,7 +205,7 @@ const save=()=>{try{localStorage.setItem('zen-ritual',JSON.stringify(S))}catch(e
 let tt;const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)};
 /* clock */
 const W=['日','一','二','三','四','五','六'];
-function tick(){const d=new Date();$('#clk').innerHTML=`${pad(d.getHours())}<i style="opacity:${d.getSeconds()%2?.25:1}">:</i>${pad(d.getMinutes())}`;$('#sec').textContent=pad(d.getSeconds());$('#dt').textContent=`${d.getFullYear()}．${pad(d.getMonth()+1)}．${pad(d.getDate())} 週${W[d.getDay()]}`;if(dkey(d)!==lastD){lastD=dkey(d);evShow()}}
+function tick(){const d=new Date();$('#clk').innerHTML=`${pad(d.getHours())}<i style="opacity:${d.getSeconds()%2?.25:1}">:</i>${pad(d.getMinutes())}`;$('#sec').textContent=pad(d.getSeconds());$('#dt').textContent=`${d.getFullYear()}．${pad(d.getMonth()+1)}．${pad(d.getDate())}　週${W[d.getDay()]}`;if(dkey(d)!==lastD){lastD=dkey(d);evShow()}}
 let lastD='';
 let EV={ev:[],bd:[]},evL=[],evI=0,evT;
 try{EV=JSON.parse(localStorage.getItem('zen-ev'))||EV}catch(e){}
@@ -219,8 +216,8 @@ async function loadSheets(){for(const[k,u]of[['ev',ZEN_CONFIG.eventsCsv],['bd',Z
 function evSet(L){const e=$('#ev');if(JSON.stringify(L)===JSON.stringify(evL))return;evL=L;evI=0;clearInterval(evT);e.style.opacity=1;e.textContent=L[0]||'';
   if(L.length>1)evT=setInterval(()=>{e.style.opacity=0;setTimeout(()=>{evI=(evI+1)%evL.length;e.textContent=evL[evI];e.style.opacity=1},450)},4500)}
 function evShow(){const t=new Date(),Y=t.getFullYear(),M=t.getMonth()+1,D=t.getDate(),t0=new Date(Y,M-1,D),F=ZEN_CONFIG.focusName||'',T=[],C=[];
-  EV.bd.forEach(b=>{const nm=b.n.includes('·')?b.n.split('·').pop().trim():b.n.replace(/^[^\p{L}\p{N}]+/u,'').trim();let n=new Date(Y,b.m-1,b.d);if(n<t0)n=new Date(Y+1,b.m-1,b.d);
-    const k=Math.round((n-t0)/864e5),txt=`${nm} ${n.getFullYear()-b.y}歲生日`;if(k===0)T.push(txt);else if(F&&nm.includes(F)&&k<=30)C.push(`${txt} 還有 ${k} 天`)});
+  EV.bd.forEach(b=>{const nm=b.n.replace(/\s+/g,' ').trim();let n=new Date(Y,b.m-1,b.d);if(n<t0)n=new Date(Y+1,b.m-1,b.d);
+    const k=Math.round((n-t0)/864e5),txt=`${nm} ${n.getFullYear()-b.y}歲生日`;if(k===0)T.push(txt);else if(F&&nm.includes(F)&&k<=30)C.push(`${txt}　還有 ${k} 天`)});
   EV.ev.forEach(e=>{if(e.m===M&&e.d===D){const y=Y-e.y;T.push(y>0?`${e.n} ${y}週年`:e.n)}});
   evSet([...T,...C])}
 /* nav */
@@ -302,6 +299,9 @@ function streak(){const days=new Set(S.log.map(l=>dkey(new Date(l.ts))));let d=n
 /* history & stats */
 const H={y:new Date().getFullYear(),m:new Date().getMonth()+1};
 let hc=null;
+const sv_=d=>`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const IC={m:sv_('<path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/>'),w:sv_('<path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"/>'),e:sv_('<path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"/><path d="M13.5 6.5l4 4"/>')};
+const pb=(v,k,n)=>v?`<button class="pb ${k}" data-v="${v.id}" aria-label="重播${n}影片">${IC[k]}</button>`:`<span class="pb off" aria-label="沒有${n}影片">${IC[k]}</span>`;
 const tc=h=>h==null?'t0':h<6?'t1':h<7?'t2':h<8?'t3':h<9?'t4':'t5';
 const hm=ts=>{const d=new Date(ts);return`${pad(d.getHours())}:${pad(d.getMinutes())}`};
 function sessions(){const L=[...S.log].sort((a,b)=>a.ts-b.ts),out=[];let p=null;
@@ -327,16 +327,16 @@ function drawChart(rows){hc&&(hc.destroy(),hc=null);const w=$('#hcw'),pts=rows.f
 function hUpdate(){const D=hData();
   [['k1','u1',D.avg,1],['k2','u2',D.total,0],['k3','u3',D.rate,0]].forEach(([k,u,x,d])=>{const e=$('#'+k);$('#'+u).hidden=x==null;x==null?e.textContent='—':countUp(e,x,d)});
   drawChart(D.rows);
-  $('#hl').innerHTML=D.rows.length?D.rows.map(d=>{const dt=new Date(d.k+'T00:00:00'),pl=d.logs.find(l=>S.videos.some(x=>x.id===l.vid)),st=d.h==null?'':tc(d.h),
-    t=d.s&&d.w?`${hm(d.s.ts)} → ${hm(d.w.ts)}`:d.logs.slice().reverse().map(l=>(l.type==='wake'?'☀️ ':'🌙 ')+hm(l.ts)).join(' ');
-    return`<div class="rec" role="button" tabindex="0" data-id="${pl?pl.id:''}" data-k="${d.k}"><div class="rl"><i class="dot ${st}"></i><div><b>${dt.getMonth()+1}月${dt.getDate()}日 週${W[dt.getDay()]}</b><br><small>${t}</small></div></div><span class="rr"><span class="hv">${d.h!=null?d.h.toFixed(1)+'h':'—'}</span><button class="ed" aria-label="編輯時間">✎</button></span></div>`}).join(''):'<div class="empty">此區間沒有紀錄<br>回到首頁，打下第一個卡。</div>'}
+  $('#hl').innerHTML=D.rows.length?D.rows.map(d=>{const dt=new Date(d.k+'T00:00:00'),sl=d.s||d.logs.find(l=>l.type==='sleep'),wl=d.w||d.logs.find(l=>l.type==='wake'),sv=sl&&S.videos.find(x=>x.id===sl.vid),wv=wl&&S.videos.find(x=>x.id===wl.vid),st=d.h==null?'':tc(d.h),
+    t=d.s&&d.w?`${hm(d.s.ts)} → ${hm(d.w.ts)}`:d.logs.slice().reverse().map(l=>(l.type==='wake'?'☀️ ':'🌙 ')+hm(l.ts)).join('　');
+    return`<div class="rec" data-k="${d.k}"><div class="rl"><i class="dot ${st}"></i><div><b>${dt.getMonth()+1}月${dt.getDate()}日 週${W[dt.getDay()]}</b><br><small>${t}</small></div></div><span class="rr"><span class="hv">${d.h!=null?d.h.toFixed(1)+'h':'—'}</span>${pb(sv,'m','晚安')}${pb(wv,'w','早安')}<button class="ed" aria-label="編輯時間">${IC.e}</button></span></div>`}).join(''):'<div class="empty">此區間沒有紀錄<br>回到首頁，打下第一個卡。</div>'}
 const GATE=()=>`<h2>歷史</h2><p class="sub">登入後解鎖你的睡眠紀錄與統計。</p>
 <div class="gate"><div class="pv" aria-hidden="true">
 <div class="stats"><div class="card stat"><b>7.2<small>h</small></b><span>平均睡眠</span></div><div class="card stat"><b>18<small>天</small></b><span>打卡天數</span></div><div class="card stat"><b>86<small>%</small></b><span>目標達成率</span></div></div>
 <div class="card"><div class="name">睡眠趨勢</div><svg viewBox="0 0 300 120" preserveAspectRatio="none" style="width:100%;height:150px;margin-top:14px"><path d="M0 70C30 40 50 90 80 60S130 30 160 55S220 95 250 50S285 40 300 45V120H0Z" fill="var(--blue)" opacity=".25"/><path d="M0 70C30 40 50 90 80 60S130 30 160 55S220 95 250 50S285 40 300 45" fill="none" stroke="var(--blue)" stroke-width="2"/></svg></div>
 <div class="card"><div class="row"><div class="name">連續 7 天</div><div class="meta" style="margin:0">近 7 天</div></div><div class="week" style="margin-top:16px"><div class="day t3"><i>7.5</i>一</div><div class="day t4 lk"><i>8.1</i>二</div><div class="day t2 lk"><i>6.3</i>三</div><div class="day t3 lk"><i>7.2</i>四</div><div class="day t1 lk"><i>5.4</i>五</div><div class="day t4 lk"><i>8.4</i>六</div><div class="day t3 lk"><i>7.0</i>日</div></div></div>
-<div class="rec"><div class="rl"><i class="dot t3"></i><div><b>10月5日 週一</b><br><small>23:40 → 07:10</small></div></div><span class="hv">7.5h</span></div>
-<div class="rec"><div class="rl"><i class="dot t1"></i><div><b>10月4日 週日</b><br><small>01:10 → 06:30</small></div></div><span class="hv">5.4h</span></div>
+<div class="rec"><div class="rl"><i class="dot t3"></i><div><b>10月5日　週一</b><br><small>23:40 → 07:10</small></div></div><span class="hv">7.5h</span></div>
+<div class="rec"><div class="rl"><i class="dot t1"></i><div><b>10月4日　週日</b><br><small>01:10 → 06:30</small></div></div><span class="hv">5.4h</span></div>
 </div>
 <div class="gc card"><div class="name">登入後開始記錄</div><p class="hint" style="margin:12px 0 18px">登入並打卡後，會同步保存：<br>・每晚的睡眠時數、平均睡眠與目標達成率<br>・近 7 天的連續打卡與每日打卡時間<br>・每天抽到的影片，隨時可以重播<br>換手機也看得到，資料只屬於你，未來若不再使用也能一鍵刪除。</p><button class="btn dark" id="gLogin" style="width:100%">Google 登入</button></div></div>`;
 function rHistory(){hc&&(hc.destroy(),hc=null);
@@ -364,7 +364,7 @@ $('#fOk').onclick=()=>{const now=Date.now(),v=[['sleep',fixO.s],['wake',fixO.w]]
   v.forEach(([ty,o],i)=>{const t=T[i];if(o&&(!t||t!==o.ts)){L=L.filter(l=>l.id!==o.id);ch=true}
     if(t&&(!o||t!==o.ts)){const dk=dkey(new Date(t));L=L.filter(l=>!(l.type===ty&&dkey(new Date(l.ts))===dk));L.push({id:now+i,type:ty,ts:t,mid:o?o.mid:null,vid:o?o.vid:null,manual:true});ch=true}});
   if(ch){S.log=dedupe(L).slice(0,400);save();Cloud.pushUser();toast('已儲存')}$('#fix').classList.remove('on');rHistory()};
-$('#hBody').onclick=e=>{if(e.target.closest('#gLogin'))return privOpen();if(e.target.closest('#addfix'))return fixOpen(null);const ed=e.target.closest('.ed');if(ed)return fixOpen(ed.closest('.rec').dataset.k);const b=e.target.closest('.rec');if(!b)return;const l=S.log.find(x=>String(x.id)===b.dataset.id),v=l&&S.videos.find(x=>x.id===l.vid);v?play(v):toast('這支影片已被刪除')};
+$('#hBody').onclick=e=>{if(e.target.closest('#gLogin'))return privOpen();if(e.target.closest('#addfix'))return fixOpen(null);const b=e.target.closest('.pb[data-v]');if(b){const v=S.videos.find(x=>x.id===b.dataset.v);return v?play(v):toast('這支影片已被刪除')}const ed=e.target.closest('.ed');if(ed)fixOpen(ed.closest('.rec').dataset.k)};
 document.addEventListener('scroll',e=>{const t=e.target;if(t&&t.classList&&t.classList.contains('view'))$('#acct').classList.toggle('hide',t.scrollTop>12)},true);
 /* PWA */
 (function(){const m={name:'oyasumi',short_name:'oyasumi',start_url:'.',display:'standalone',background_color:'#F5F7FA',theme_color:'#F5F7FA',icons:[{src:'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#F5F7FA"/><circle cx="256" cy="256" r="120" fill="#1A1A1A"/></svg>'),sizes:'512x512',type:'image/svg+xml'}]};
