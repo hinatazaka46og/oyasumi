@@ -338,7 +338,7 @@ const GATE=()=>`<h2>歷史</h2><p class="sub">登入後解鎖你的睡眠紀錄�
 <div class="rec"><div class="rl"><i class="dot t3"></i><div><b>10月5日 週一</b><br><small>23:40 → 07:10</small></div></div><span class="hv">7.5h</span></div>
 <div class="rec"><div class="rl"><i class="dot t1"></i><div><b>10月4日 週日</b><br><small>01:10 → 06:30</small></div></div><span class="hv">5.4h</span></div>
 </div>
-<div class="gc card"><div class="name">登入後開始記錄</div><p class="hint" style="margin:12px 0 18px">登入並打卡後，會同步保存：<br>・每晚的睡眠時數、平均睡眠與目標達成率<br>・近 7 天的連續打卡與每日打卡時間<br>・每天抽到的影片，隨時可以重播<br>換手機也看得到，資料只屬於你，未來若不再使用的時候也能一鍵刪除。</p><button class="btn dark" id="gLogin" style="width:100%">Google 登入</button></div></div>`;
+<div class="gc card"><div class="name">登入後開始記錄</div><p class="hint" style="margin:12px 0 18px">登入並打卡後，會同步保存：<br>・每晚的睡眠時數、平均睡眠與目標達成率<br>・近 7 天的連續打卡與每日打卡時間<br>・每天抽到的影片，隨時可以重播<br>換手機也看得到，資料只屬於你，未來若不再使用也能一鍵刪除。</p><button class="btn dark" id="gLogin" style="width:100%">Google 登入</button></div></div>`;
 function rHistory(){hc&&(hc.destroy(),hc=null);
   if(!Cloud.off&&!Cloud.user){$('#hBody').innerHTML=Cloud.ready?GATE():'<div class="empty">載入中…</div>';return}const ys=[...new Set([new Date().getFullYear(),...S.log.map(l=>new Date(l.ts).getFullYear())])].sort((a,b)=>b-a);if(!ys.includes(H.y))H.y=ys[0];
   const{n,days}=streak(),sh=new Map();sessions().forEach(x=>{if(!sh.has(x.day)||x.h>sh.get(x.day))sh.set(x.day,x.h)});
