@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta name="referrer" content="no-referrer">
@@ -146,8 +146,8 @@ input[type=time]{font-family:var(--serif);font-size:22px;padding:6px 14px}
 <script>
 /* ===== 部署前請填寫 ===== */
 const ZEN_CONFIG={
-  eventsCsv:'',    // 紀念日試算表「發布到網路」的 CSV 網址
-  birthdaysCsv:'', // 生日試算表「發布到網路」的 CSV 網址
+  eventsCsv:'https://docs.google.com/spreadsheets/d/e/2PACX-1vQF6fcGnEfe1keSPJT7jn885gq-4ktCzZyM5ksd5SkU31M6tVXsgnuI61_Av0H_yx-TYmX_mXMd8eLm/pub?gid=125717504&single=true&output=csv',    // 紀念日試算表「發布到網路」的 CSV 網址
+  birthdaysCsv:'https://docs.google.com/spreadsheets/d/e/2PACX-1vQF6fcGnEfe1keSPJT7jn885gq-4ktCzZyM5ksd5SkU31M6tVXsgnuI61_Av0H_yx-TYmX_mXMd8eLm/pub?gid=727122305&single=true&output=csv', // 生日試算表「發布到網路」的 CSV 網址
   focusName:'加藤史帆', // 這位的生日會提前 30 天倒數，其他只在當天顯示
   adminEmail:'tingcohoshi@gmail.com', // 唯一能看到「設定」分頁的管理者 Google 信箱
   firebase:{apiKey:'AIzaSyBXQxKqix2Ac21K-47dYyXDLJ_9DAOotu4',authDomain:'oyasumi-9f934.firebaseapp.com',projectId:'oyasumi-9f934',appId:'1:934418045766:web:66e99728309c7ffd0a2347'}
@@ -155,6 +155,7 @@ const ZEN_CONFIG={
 </script>
 <div id="haze"></div>
 <div id="bg"><i></i><i></i><div id="veil"></div><div id="frame"></div></div>
+
 
 <main>
 <section class="view on" id="home">
@@ -172,9 +173,11 @@ const ZEN_CONFIG={
 <section class="view" id="history"><div class="wrap" id="hBody"></div></section>
 </main>
 
+
 <nav id="nav" aria-label="主導航"><span id="pill"></span>
   <button data-v="home" class="on">首頁</button><button data-v="members">成員</button><button data-v="history">歷史</button>
 </nav>
+
 
 <div id="player" aria-label="影片播放器"><video id="vid" playsinline autoplay></video><button id="back" aria-label="返回首頁">✕</button></div>
 <div id="priv" role="dialog" aria-modal="true" aria-labelledby="ptt"><div class="box"><h3 id="ptt">隱私權與資料同步說明</h3>
@@ -185,6 +188,7 @@ const ZEN_CONFIG={
 <div id="acc" role="dialog" aria-modal="true" aria-labelledby="atl"><div class="box"><h3 id="atl">帳號</h3><p id="accMail" style="margin-bottom:10px"></p><p>刪除後，雲端上你的睡眠與打卡紀錄與登入帳號會被永久移除，無法復原。共用的影片與背景不受影響。</p><div class="tools"><button class="btn" id="accNo">關閉</button><button class="btn dark" id="accOut">登出</button></div><button class="btn" id="accDel" style="width:100%;margin-top:10px;color:#B5655C">刪除我的資料與帳號</button></div></div>
 <button id="acct" hidden aria-label="帳號"></button>
 <div id="toast" role="status"></div>
+
 
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -204,7 +208,7 @@ const save=()=>{try{localStorage.setItem('zen-ritual',JSON.stringify(S))}catch(e
 let tt;const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)};
 /* clock */
 const W=['日','一','二','三','四','五','六'];
-function tick(){const d=new Date();$('#clk').innerHTML=`${pad(d.getHours())}<i style="opacity:${d.getSeconds()%2?.25:1}">:</i>${pad(d.getMinutes())}`;$('#sec').textContent=pad(d.getSeconds());$('#dt').textContent=`${d.getFullYear()}．${pad(d.getMonth()+1)}．${pad(d.getDate())}　週${W[d.getDay()]}`;if(dkey(d)!==lastD){lastD=dkey(d);evShow()}}
+function tick(){const d=new Date();$('#clk').innerHTML=`${pad(d.getHours())}<i style="opacity:${d.getSeconds()%2?.25:1}">:</i>${pad(d.getMinutes())}`;$('#sec').textContent=pad(d.getSeconds());$('#dt').textContent=`${d.getFullYear()}．${pad(d.getMonth()+1)}．${pad(d.getDate())} 週${W[d.getDay()]}`;if(dkey(d)!==lastD){lastD=dkey(d);evShow()}}
 let lastD='';
 let EV={ev:[],bd:[]},evL=[],evI=0,evT;
 try{EV=JSON.parse(localStorage.getItem('zen-ev'))||EV}catch(e){}
@@ -216,7 +220,7 @@ function evSet(L){const e=$('#ev');if(JSON.stringify(L)===JSON.stringify(evL))re
   if(L.length>1)evT=setInterval(()=>{e.style.opacity=0;setTimeout(()=>{evI=(evI+1)%evL.length;e.textContent=evL[evI];e.style.opacity=1},450)},4500)}
 function evShow(){const t=new Date(),Y=t.getFullYear(),M=t.getMonth()+1,D=t.getDate(),t0=new Date(Y,M-1,D),F=ZEN_CONFIG.focusName||'',T=[],C=[];
   EV.bd.forEach(b=>{const nm=b.n.includes('·')?b.n.split('·').pop().trim():b.n.replace(/^[^\p{L}\p{N}]+/u,'').trim();let n=new Date(Y,b.m-1,b.d);if(n<t0)n=new Date(Y+1,b.m-1,b.d);
-    const k=Math.round((n-t0)/864e5),txt=`${nm} ${n.getFullYear()-b.y}歲生日`;if(k===0)T.push(txt);else if(F&&nm.includes(F)&&k<=30)C.push(`${txt}　還有 ${k} 天`)});
+    const k=Math.round((n-t0)/864e5),txt=`${nm} ${n.getFullYear()-b.y}歲生日`;if(k===0)T.push(txt);else if(F&&nm.includes(F)&&k<=30)C.push(`${txt} 還有 ${k} 天`)});
   EV.ev.forEach(e=>{if(e.m===M&&e.d===D){const y=Y-e.y;T.push(y>0?`${e.n} ${y}週年`:e.n)}});
   evSet([...T,...C])}
 /* nav */
@@ -324,17 +328,17 @@ function hUpdate(){const D=hData();
   [['k1','u1',D.avg,1],['k2','u2',D.total,0],['k3','u3',D.rate,0]].forEach(([k,u,x,d])=>{const e=$('#'+k);$('#'+u).hidden=x==null;x==null?e.textContent='—':countUp(e,x,d)});
   drawChart(D.rows);
   $('#hl').innerHTML=D.rows.length?D.rows.map(d=>{const dt=new Date(d.k+'T00:00:00'),pl=d.logs.find(l=>S.videos.some(x=>x.id===l.vid)),st=d.h==null?'':tc(d.h),
-    t=d.s&&d.w?`${hm(d.s.ts)} → ${hm(d.w.ts)}`:d.logs.slice().reverse().map(l=>(l.type==='wake'?'☀️ ':'🌙 ')+hm(l.ts)).join('　');
-    return`<div class="rec" role="button" tabindex="0" data-id="${pl?pl.id:''}" data-k="${d.k}"><div class="rl"><i class="dot ${st}"></i><div><b>${dt.getMonth()+1}月${dt.getDate()}日　週${W[dt.getDay()]}</b><br><small>${t}</small></div></div><span class="rr"><span class="hv">${d.h!=null?d.h.toFixed(1)+'h':'—'}</span><button class="ed" aria-label="編輯時間">✎</button></span></div>`}).join(''):'<div class="empty">此區間沒有紀錄<br>回到首頁，打下第一個卡。</div>'}
+    t=d.s&&d.w?`${hm(d.s.ts)} → ${hm(d.w.ts)}`:d.logs.slice().reverse().map(l=>(l.type==='wake'?'☀️ ':'🌙 ')+hm(l.ts)).join(' ');
+    return`<div class="rec" role="button" tabindex="0" data-id="${pl?pl.id:''}" data-k="${d.k}"><div class="rl"><i class="dot ${st}"></i><div><b>${dt.getMonth()+1}月${dt.getDate()}日 週${W[dt.getDay()]}</b><br><small>${t}</small></div></div><span class="rr"><span class="hv">${d.h!=null?d.h.toFixed(1)+'h':'—'}</span><button class="ed" aria-label="編輯時間">✎</button></span></div>`}).join(''):'<div class="empty">此區間沒有紀錄<br>回到首頁，打下第一個卡。</div>'}
 const GATE=()=>`<h2>歷史</h2><p class="sub">登入後解鎖你的睡眠紀錄與統計。</p>
 <div class="gate"><div class="pv" aria-hidden="true">
 <div class="stats"><div class="card stat"><b>7.2<small>h</small></b><span>平均睡眠</span></div><div class="card stat"><b>18<small>天</small></b><span>打卡天數</span></div><div class="card stat"><b>86<small>%</small></b><span>目標達成率</span></div></div>
 <div class="card"><div class="name">睡眠趨勢</div><svg viewBox="0 0 300 120" preserveAspectRatio="none" style="width:100%;height:150px;margin-top:14px"><path d="M0 70C30 40 50 90 80 60S130 30 160 55S220 95 250 50S285 40 300 45V120H0Z" fill="var(--blue)" opacity=".25"/><path d="M0 70C30 40 50 90 80 60S130 30 160 55S220 95 250 50S285 40 300 45" fill="none" stroke="var(--blue)" stroke-width="2"/></svg></div>
 <div class="card"><div class="row"><div class="name">連續 7 天</div><div class="meta" style="margin:0">近 7 天</div></div><div class="week" style="margin-top:16px"><div class="day t3"><i>7.5</i>一</div><div class="day t4 lk"><i>8.1</i>二</div><div class="day t2 lk"><i>6.3</i>三</div><div class="day t3 lk"><i>7.2</i>四</div><div class="day t1 lk"><i>5.4</i>五</div><div class="day t4 lk"><i>8.4</i>六</div><div class="day t3 lk"><i>7.0</i>日</div></div></div>
-<div class="rec"><div class="rl"><i class="dot t3"></i><div><b>10月5日　週一</b><br><small>23:40 → 07:10</small></div></div><span class="hv">7.5h</span></div>
-<div class="rec"><div class="rl"><i class="dot t1"></i><div><b>10月4日　週日</b><br><small>01:10 → 06:30</small></div></div><span class="hv">5.4h</span></div>
+<div class="rec"><div class="rl"><i class="dot t3"></i><div><b>10月5日 週一</b><br><small>23:40 → 07:10</small></div></div><span class="hv">7.5h</span></div>
+<div class="rec"><div class="rl"><i class="dot t1"></i><div><b>10月4日 週日</b><br><small>01:10 → 06:30</small></div></div><span class="hv">5.4h</span></div>
 </div>
-<div class="gc card"><div class="name">登入後開始記錄</div><p class="hint" style="margin:12px 0 18px">登入並打卡後，會同步保存：<br>・每晚的睡眠時數、平均睡眠與目標達成率<br>・近 7 天的連續打卡與每日打卡時間<br>・每天抽到的影片，隨時可以重播<br>換手機也看得到，資料只屬於你。</p><button class="btn dark" id="gLogin" style="width:100%">Google 登入</button></div></div>`;
+<div class="gc card"><div class="name">登入後開始記錄</div><p class="hint" style="margin:12px 0 18px">登入並打卡後，會同步保存：<br>・每晚的睡眠時數、平均睡眠與目標達成率<br>・近 7 天的連續打卡與每日打卡時間<br>・每天抽到的影片，隨時可以重播<br>換手機也看得到，資料只屬於你，未來若不再使用的時候也能一鍵刪除。</p><button class="btn dark" id="gLogin" style="width:100%">Google 登入</button></div></div>`;
 function rHistory(){hc&&(hc.destroy(),hc=null);
   if(!Cloud.off&&!Cloud.user){$('#hBody').innerHTML=Cloud.ready?GATE():'<div class="empty">載入中…</div>';return}const ys=[...new Set([new Date().getFullYear(),...S.log.map(l=>new Date(l.ts).getFullYear())])].sort((a,b)=>b-a);if(!ys.includes(H.y))H.y=ys[0];
   const{n,days}=streak(),sh=new Map();sessions().forEach(x=>{if(!sh.has(x.day)||x.h>sh.get(x.day))sh.set(x.day,x.h)});
