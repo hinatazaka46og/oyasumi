@@ -16,6 +16,9 @@
 <meta name="theme-color" content="#F5F7FA">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>oyasumi</title>
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
@@ -376,11 +379,8 @@ $('#fOk').onclick=()=>{const now=Date.now(),v=[['sleep',fixO.s],['wake',fixO.w]]
 $('#hBody').onclick=e=>{if(e.target.closest('#gLogin'))return privOpen();if(e.target.closest('#addfix'))return fixOpen(null);const b=e.target.closest('.pb[data-v]');if(b){const v=S.videos.find(x=>x.id===b.dataset.v);return v?play(v):toast('這支影片已被刪除')}const ed=e.target.closest('.ed');if(ed)fixOpen(ed.closest('.rec').dataset.k)};
 document.addEventListener('scroll',e=>{const t=e.target;if(t&&t.classList&&t.classList.contains('view'))$('#acct').classList.toggle('hide',t.scrollTop>12)},true);
 /* PWA */
-(function(){const m={name:'靜時',short_name:'靜時',start_url:'.',display:'standalone',background_color:'#F5F7FA',theme_color:'#F5F7FA',icons:[{src:'https://pbs.twimg.com/media/Fx8QnrjaAAEeXm2?format=jpg&name=small',sizes:'512x512',type:'image/jpeg'}]};
-  const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(m)],{type:'application/manifest+json'}));document.head.appendChild(l);
-  if('serviceWorker'in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}})();
+if('serviceWorker'in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 tick();evShow();loadSheets();setInterval(tick,1000);pill();bgStart();acctRender();document.fonts&&document.fonts.ready.then(pill);
-
 </script>
 <script type="module">
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
