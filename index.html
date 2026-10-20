@@ -153,21 +153,29 @@ input[type=time]{font-family:var(--serif);font-size:22px;padding:6px 14px}
 #back:hover{opacity:1}#back:active{transform:scale(.86)}
 #toast{position:fixed;left:50%;top:max(20px,env(safe-area-inset-top));transform:translate(-50%,-90px);z-index:30;padding:12px 22px;border-radius:99px;background:var(--ink);color:var(--bg);font-size:13px;letter-spacing:.08em;transition:transform .7s var(--sp);max-width:90vw}
 #toast.on{transform:translate(-50%,0)}
-.mgs{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;height:clamp(170px,34vh,300px);margin:10px 0 14px}
-.mgt{flex:1;height:100%;min-width:0;display:flex;align-items:flex-end;justify-content:center;transform-origin:50% 100%}
-.mgk{width:44%;max-width:180px;margin-left:-6%;height:88%;display:flex;align-items:flex-end;justify-content:center;flex:none}
-.mgt img,.mgk img{max-width:100%;max-height:100%;object-fit:contain;display:block;-webkit-user-drag:none}
+.mgs{--k:.4;--gnd:color-mix(in srgb,var(--blue) 16%,transparent);position:relative;overflow:hidden;border-radius:16px;margin:10px 0 14px;height:210px;background:linear-gradient(to bottom,color-mix(in srgb,var(--blue) 16%,transparent),transparent 78%)}
+.mgs::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-28px;height:70px;border-radius:50%;background:var(--gnd)}
+.mgs[data-s=spring]{--gnd:rgba(232,190,202,.32)}.mgs[data-s=summer]{--gnd:rgba(160,190,150,.30)}.mgs[data-s=autumn]{--gnd:rgba(226,192,144,.34)}.mgs[data-s=winter]{--gnd:rgba(255,255,255,.95)}
+.mgt{position:absolute;z-index:1;left:0;bottom:18px;width:calc(360px*var(--k));height:calc(360px*var(--k));transform-origin:50% 100%}
+.mgk{position:absolute;z-index:2;right:0;bottom:18px;width:calc(394px*var(--k));height:calc(265px*var(--k))}
+.mgt img,.mgk img{width:100%;height:100%;object-fit:contain;display:block;-webkit-user-drag:none}
+.bub{position:absolute;z-index:3;right:calc(227px*var(--k));transform:translateX(50%);bottom:calc(24px + 236px*var(--k));white-space:nowrap;font-size:11px;color:var(--ink);padding:6px 11px;border-radius:12px;background:rgba(255,255,255,.92);border:1px solid var(--line)}
+.bub::after{content:"";position:absolute;left:50%;bottom:-5px;width:8px;height:8px;background:inherit;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:translateX(-50%) rotate(45deg)}
+.lv{font-size:12px;padding:4px 11px;border-radius:99px;background:color-mix(in srgb,var(--blue) 18%,#fff);border:1px solid color-mix(in srgb,var(--blue) 45%,transparent);color:var(--ink);letter-spacing:.06em}.lv b{font-weight:500;margin-left:8px}
+.pips{display:flex;align-items:flex-start;margin:14px 0 0}.pp{display:flex;flex-direction:column;align-items:center;gap:4px;flex:none;min-width:30px}
+.pp b{width:9px;height:9px;border-radius:50%;border:1px solid color-mix(in srgb,var(--mute) 55%,transparent);margin-top:3px}.pp.d b{background:var(--blue);border-color:var(--blue)}.pp.c b{width:13px;height:13px;margin-top:1px;background:var(--blue);border-color:var(--blue);box-shadow:0 0 0 4px color-mix(in srgb,var(--blue) 26%,transparent)}
+.pp span{font-size:10px;color:var(--mute)}.pp.c span{color:var(--ink)}.ln{flex:1;height:1px;background:var(--line);margin-top:8px}.ln.d{background:var(--blue)}
 .mgt.pop{animation:mgpop .9s var(--sp)}@keyframes mgpop{from{transform:scale(.82)}to{transform:none}}
-.drops{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.drops{position:absolute;left:0;top:0;bottom:0;width:calc(360px*var(--k));pointer-events:none;overflow:hidden;z-index:3}
 .drops i{position:absolute;top:0;width:7px;height:11px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:var(--blue);opacity:0;animation:mgdr 1s ease-in forwards}
-@keyframes mgdr{0%{transform:translateY(-10px);opacity:0}20%{opacity:.9}100%{transform:translateY(min(30vh,240px));opacity:0}}
+@keyframes mgdr{0%{transform:translateY(-10px);opacity:0}20%{opacity:.9}100%{transform:translateY(calc(300px*var(--k)));opacity:0}}
 .mgr{display:flex;align-items:center;gap:14px}.mgp{flex:1;min-width:0}
 .mgp .t{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-bottom:6px;font-variant-numeric:tabular-nums}
-.mgp .b{height:6px;border-radius:3px;background:var(--mist)}.mgp .b i{display:block;height:100%;border-radius:3px;background:var(--blue);transition:width 1s var(--out)}
+.mgp .b{height:8px;border-radius:4px;background:var(--mist)}.mgp .b i{display:block;height:100%;border-radius:4px;background:var(--blue);transition:width 1s var(--out)}
 .mgp .b.ok i{box-shadow:0 0 10px 2px color-mix(in srgb,var(--blue) 75%,transparent);animation:mgglow 2.4s ease-in-out infinite}
 @keyframes mgglow{50%{box-shadow:0 0 16px 4px color-mix(in srgb,var(--blue) 85%,transparent)}}
-.wand{width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;border:1px solid var(--line);color:var(--mute);transition:transform .5s var(--sp),background .3s}
-.wand img,.wand svg{width:26px;height:26px;display:block}.wand:active{transform:scale(.88)}.wand.ok{background:var(--ink);color:var(--bg);border-color:transparent}
+.wand{width:52px;height:52px;border-radius:50%;flex:none;display:grid;place-items:center;border:1px solid var(--line);color:var(--mute);transition:transform .5s var(--sp),background .3s}
+.wand img,.wand svg{width:28px;height:28px;display:block}.wand:active{transform:scale(.88)}.wand.ok{background:var(--ink);color:var(--bg);border-color:transparent;animation:mgring 2.4s ease-out infinite}@keyframes mgring{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--blue) 55%,transparent)}70%,100%{box-shadow:0 0 0 10px transparent}}
 nav button.mg::after{content:"";position:absolute;top:11px;left:calc(50% + 17px);width:7px;height:7px;border-radius:50%;background:var(--blue)}
 .rec small svg{vertical-align:-3px;margin-right:2px}
 #mgd .box img{max-height:50vh;object-fit:contain}
@@ -431,10 +439,15 @@ return o+'</svg>'}};
 const bearArt=(p,n=S.casts)=>art([`bear-stage${Math.min(n,3)+1}-${p}`,`bear-${p}`,'bear-idle'],'bear');
 const art=(names,k,a)=>{const u=names.map(n=>'assets/'+n+'.png').filter(x=>!MISS.has(x));return u.length?`<img src="${u[0]}" alt="" data-f="${u.slice(1).join(',')}" data-p="${k}" data-a="${a||''}" onerror="nx(this)" draggable="false">`:PH[k](a)};
 function nx(i){MISS.add(i.getAttribute('src'));const f=i.dataset.f?i.dataset.f.split(',').filter(x=>!MISS.has(x)):[];if(f.length){i.dataset.f=f.slice(1).join(',');i.src=f[0]}else{i.onerror=null;i.outerHTML=PH[i.dataset.p](i.dataset.a)}}
-function rMagic(){const el=$('#magic');if(!el)return;const m=magic(),ok=m>=MG.N,s=stg(),se=season(),tn=s>=MG.BLOOM?'tree-bloom-'+se:['tree-seed','tree-sprout','tree-small','tree-big'][s];
-el.innerHTML=`<div class="card"><div class="row"><span class="name">魔法樹</span><span class="meta" style="margin:0">${STG[s]}${s>=MG.BLOOM?'・'+SEAS[se]:''}</span></div>
-<div class="mgs"><div class="mgt" id="mgt">${art([tn],'tree',s+'|'+se)}</div><div class="mgk" id="mgk">${bearArt('idle')}</div><div class="drops" id="drp"></div></div>
-<div class="mgr"><div class="mgp"><div class="t"><span>魔力</span><span>${Math.floor(m*10)/10} / ${MG.N}h</span></div><div class="b ${ok?'ok':''}"><i style="width:${Math.min(100,m/MG.N*100)}%"></i></div></div><button class="wand ${ok?'ok':''}" id="wand" aria-label="${ok?'施展魔法':'魔力不足'}">${art(['wand'],'wand')}</button></div></div>`}
+let mgRO=null;
+function fitMg(){const s=$('#mgs');if(!s)return;const k=Math.min((s.clientWidth||300)/664,.62);s.style.setProperty('--k',k.toFixed(4));s.style.height=Math.round(380*k+56)+'px'}
+function rMagic(){const el=$('#magic');if(!el)return;const m=magic(),ok=m>=MG.N,s=stg(),se=season(),bl=s>=MG.BLOOM,tn=bl?'tree-bloom-'+se:['tree-seed','tree-sprout','tree-small','tree-big'][s];
+const say=ok?(bl?'可以抽獎勵了！':'可以施法了！'):`再 ${Math.ceil((MG.N-m)*10)/10}h 就能施法`,nx_=bl?'集滿可抽獎勵':'下一階段：'+STG[s+1];
+el.innerHTML=`<div class="card"><div class="row"><span class="name">魔法樹</span><span class="lv">Lv.${s+1}<b>${STG[s]}${bl?'・'+SEAS[se]:''}</b></span></div>
+<div class="pips">${STG.map((n,i)=>(i?`<i class="ln ${i<=s?'d':''}"></i>`:'')+`<div class="pp ${i<s?'d':i===s?'c':''}"><b></b><span>${n}</span></div>`).join('')}</div>
+<div class="mgs" id="mgs" data-s="${se}"><div class="mgt" id="mgt">${art([tn],'tree',s+'|'+se)}</div><div class="mgk" id="mgk">${bearArt('idle')}</div><div class="drops" id="drp"></div><div class="bub" id="bub">${say}</div></div>
+<div class="mgr"><div class="mgp"><div class="t"><span>魔力　${nx_}</span><span>${Math.floor(m*10)/10} / ${MG.N}h</span></div><div class="b ${ok?'ok':''}"><i style="width:${Math.min(100,m/MG.N*100)}%"></i></div></div><button class="wand ${ok?'ok':''}" id="wand" aria-label="${ok?'施展魔法':'魔力不足'}">${art(['wand'],'wand')}</button></div></div>`;
+fitMg();if(window.ResizeObserver){mgRO&&mgRO.disconnect();mgRO=new ResizeObserver(fitMg);mgRO.observe($('#mgs'))}}
 function mgDot(){const b=$('nav [data-v="history"]');b&&b.classList.toggle('mg',(Cloud.off||!!Cloud.user)&&magic()>=MG.N)}
 function rewards(){const R=EV.rw||[];if(R.length<2)return[];const h=R[0].map(x=>x.trim().toLowerCase()),seen=new Set(),out=[];
 R.slice(1).forEach(r=>{const o={};h.forEach((k,i)=>o[k]=(r[i]||'').trim());if(!o.id||seen.has(o.id)||o.enabled.toUpperCase()==='FALSE'||!['photo','audio','video','text'].includes(o.type))return;if(o.type==='text'?!o.text:!/^https?:\/\//.test(o.url))return;seen.add(o.id);out.push(o)});return out}
@@ -446,7 +459,7 @@ addEventListener('keydown',e=>{if(e.key==='Escape')mgClose()});
 function cast(){if(mgBusy)return;const m=magic();if(m<MG.N)return toast(`魔力還差 ${Math.ceil((MG.N-m)*10)/10}h`);
 const bloom=S.casts>=MG.BLOOM,se=season(),prev=S.casts;let rw=null;
 if(bloom){if(!EV.rwOk)return toast('獎勵載入中，請稍後再試');const P=rewards(),n=S.unlocked.length<500?P.filter(r=>!S.unlocked.includes(r.id)):[],U=P.filter(r=>S.unlocked.includes(r.id)),pk=a=>a[Math.floor(Math.random()*a.length)];rw=n.length?pk(n):U.length?pk(U):null;if(rw&&!S.unlocked.includes(rw.id))S.unlocked.push(rw.id)}
-mgBusy=true;S.casts++;save();Cloud.pushUser();mgDot();
+mgBusy=true;S.casts++;save();Cloud.pushUser();mgDot();const bb=$('#bub');bb&&(bb.style.opacity=0);
 const d=$('#drp'),k=$('#mgk');d&&(d.innerHTML=[...Array(7)].map((_,i)=>`<i style="left:${14+i*11}%;animation-delay:${i*.12}s"></i>`).join(''));k&&(k.innerHTML=bearArt('cast',prev));
 setTimeout(()=>{rMagic();const t=$('#mgt');t&&t.classList.add('pop')},1100);
 setTimeout(()=>{const k2=$('#mgk');k2&&(k2.innerHTML=bearArt('happy'));$('#mgh').textContent=bloom?'魔法樹':'施法成功';$('#mgb').innerHTML=bloom?`<p>${BLOOM_MSG[se]}</p>`+(rw?rwHtml(rw):''):'<p>💦施展了【水水噴】！としくま揮動魔杖灌溉魔法樹，樹木順利長大！</p>';$('#mgd').classList.add('on')},1900)}
