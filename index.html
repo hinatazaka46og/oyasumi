@@ -155,7 +155,7 @@ input[type=time]{font-family:var(--serif);font-size:22px;padding:6px 14px}
 #toast.on{transform:translate(-50%,0)}
 .mgs{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;height:clamp(170px,34vh,300px);margin:10px 0 14px}
 .mgt{flex:1;height:100%;min-width:0;display:flex;align-items:flex-end;justify-content:center;transform-origin:50% 100%}
-.mgk{width:34%;max-width:130px;height:88%;display:flex;align-items:flex-end;justify-content:center;flex:none}
+.mgk{width:44%;max-width:180px;margin-left:-6%;height:88%;display:flex;align-items:flex-end;justify-content:center;flex:none}
 .mgt img,.mgk img{max-width:100%;max-height:100%;object-fit:contain;display:block;-webkit-user-drag:none}
 .mgt.pop{animation:mgpop .9s var(--sp)}@keyframes mgpop{from{transform:scale(.82)}to{transform:none}}
 .drops{position:absolute;inset:0;pointer-events:none;overflow:hidden}
@@ -428,27 +428,28 @@ o+=`<path d="M100 190V${tr[0]}" stroke="${tk}" stroke-width="${tr[1]}" stroke-li
 if(s===4){o+=c.map(([x,y,r])=>[[-.5,-.3],[.4,-.5],[.1,.4],[-.2,.1],[.6,.2]].map(([a,b])=>`<circle cx="${x+a*r}" cy="${y+b*r}" r="${se==='winter'?5:4}" fill="${fl}"/>`).join('')).join('');
 if(se==='winter')o+=c.map(([x,y,r])=>`<ellipse cx="${x}" cy="${y-r*.7}" rx="${r*.8}" ry="${r*.3}" fill="${fl}"/>`).join('')}}
 return o+'</svg>'}};
+const bearArt=(p,n=S.casts)=>art([`bear-stage${Math.min(n,3)+1}-${p}`,`bear-${p}`,'bear-idle'],'bear');
 const art=(names,k,a)=>{const u=names.map(n=>'assets/'+n+'.png').filter(x=>!MISS.has(x));return u.length?`<img src="${u[0]}" alt="" data-f="${u.slice(1).join(',')}" data-p="${k}" data-a="${a||''}" onerror="nx(this)" draggable="false">`:PH[k](a)};
 function nx(i){MISS.add(i.getAttribute('src'));const f=i.dataset.f?i.dataset.f.split(',').filter(x=>!MISS.has(x)):[];if(f.length){i.dataset.f=f.slice(1).join(',');i.src=f[0]}else{i.onerror=null;i.outerHTML=PH[i.dataset.p](i.dataset.a)}}
 function rMagic(){const el=$('#magic');if(!el)return;const m=magic(),ok=m>=MG.N,s=stg(),se=season(),tn=s>=MG.BLOOM?'tree-bloom-'+se:['tree-seed','tree-sprout','tree-small','tree-big'][s];
 el.innerHTML=`<div class="card"><div class="row"><span class="name">魔法樹</span><span class="meta" style="margin:0">${STG[s]}${s>=MG.BLOOM?'・'+SEAS[se]:''}</span></div>
-<div class="mgs"><div class="mgt" id="mgt">${art([tn],'tree',s+'|'+se)}</div><div class="mgk" id="mgk">${art(['bear-idle'],'bear')}</div><div class="drops" id="drp"></div></div>
+<div class="mgs"><div class="mgt" id="mgt">${art([tn],'tree',s+'|'+se)}</div><div class="mgk" id="mgk">${bearArt('idle')}</div><div class="drops" id="drp"></div></div>
 <div class="mgr"><div class="mgp"><div class="t"><span>魔力</span><span>${Math.floor(m*10)/10} / ${MG.N}h</span></div><div class="b ${ok?'ok':''}"><i style="width:${Math.min(100,m/MG.N*100)}%"></i></div></div><button class="wand ${ok?'ok':''}" id="wand" aria-label="${ok?'施展魔法':'魔力不足'}">${art(['wand'],'wand')}</button></div></div>`}
 function mgDot(){const b=$('nav [data-v="history"]');b&&b.classList.toggle('mg',(Cloud.off||!!Cloud.user)&&magic()>=MG.N)}
 function rewards(){const R=EV.rw||[];if(R.length<2)return[];const h=R[0].map(x=>x.trim().toLowerCase()),seen=new Set(),out=[];
 R.slice(1).forEach(r=>{const o={};h.forEach((k,i)=>o[k]=(r[i]||'').trim());if(!o.id||seen.has(o.id)||o.enabled.toUpperCase()==='FALSE'||!['photo','audio','video','text'].includes(o.type))return;if(o.type==='text'?!o.text:!/^https?:\/\//.test(o.url))return;seen.add(o.id);out.push(o)});return out}
 const rwHtml=r=>(r.title?`<p style="color:var(--ink);font:500 15px var(--serif);margin:0 0 10px">${esc(r.title)}</p>`:'')+(r.type==='photo'?`<img src="${esc(r.url)}" alt="" style="width:100%;border-radius:14px;display:block;margin-bottom:10px">`:r.type==='audio'?`<audio controls preload="none" src="${esc(r.url)}" style="width:100%;margin-bottom:10px"></audio>`:r.type==='video'?`<button class="btn dark" id="mgPlay" data-url="${esc(r.url)}" style="width:100%;margin-bottom:10px">播放影片</button>`:'')+(r.text?`<p style="white-space:pre-line;${r.type==='text'?'color:var(--ink)':''}">${esc(r.text)}</p>`:'')+(r.credit?`<p class="hint">來源：${esc(r.credit)}</p>`:'');
 let mgBusy=false;
-function mgClose(){$('#mgd').classList.remove('on');const a=$('#mgb audio');a&&a.pause();mgBusy=false;const k=$('#mgk');k&&(k.innerHTML=art(['bear-idle'],'bear'));setTimeout(()=>{$('#mgb').innerHTML=''},500)}
+function mgClose(){$('#mgd').classList.remove('on');const a=$('#mgb audio');a&&a.pause();mgBusy=false;const k=$('#mgk');k&&(k.innerHTML=bearArt('idle'));setTimeout(()=>{$('#mgb').innerHTML=''},500)}
 $('#mgOk').onclick=mgClose;$('#mgd').onclick=e=>{if(e.target.id==='mgd')return mgClose();const p=e.target.closest('#mgPlay');if(p){const u=p.dataset.url;mgClose();play({url:u})}};
 addEventListener('keydown',e=>{if(e.key==='Escape')mgClose()});
 function cast(){if(mgBusy)return;const m=magic();if(m<MG.N)return toast(`魔力還差 ${Math.ceil((MG.N-m)*10)/10}h`);
-const bloom=S.casts>=MG.BLOOM,se=season();let rw=null;
+const bloom=S.casts>=MG.BLOOM,se=season(),prev=S.casts;let rw=null;
 if(bloom){if(!EV.rwOk)return toast('獎勵載入中，請稍後再試');const P=rewards(),n=S.unlocked.length<500?P.filter(r=>!S.unlocked.includes(r.id)):[],U=P.filter(r=>S.unlocked.includes(r.id)),pk=a=>a[Math.floor(Math.random()*a.length)];rw=n.length?pk(n):U.length?pk(U):null;if(rw&&!S.unlocked.includes(rw.id))S.unlocked.push(rw.id)}
 mgBusy=true;S.casts++;save();Cloud.pushUser();mgDot();
-const d=$('#drp'),k=$('#mgk');d&&(d.innerHTML=[...Array(7)].map((_,i)=>`<i style="left:${14+i*11}%;animation-delay:${i*.12}s"></i>`).join(''));k&&(k.innerHTML=art(['bear-cast','bear-idle'],'bear'));
+const d=$('#drp'),k=$('#mgk');d&&(d.innerHTML=[...Array(7)].map((_,i)=>`<i style="left:${14+i*11}%;animation-delay:${i*.12}s"></i>`).join(''));k&&(k.innerHTML=bearArt('cast',prev));
 setTimeout(()=>{rMagic();const t=$('#mgt');t&&t.classList.add('pop')},1100);
-setTimeout(()=>{const k2=$('#mgk');k2&&(k2.innerHTML=art(['bear-happy','bear-idle'],'bear'));$('#mgh').textContent=bloom?'魔法樹':'施法成功';$('#mgb').innerHTML=bloom?`<p>${BLOOM_MSG[se]}</p>`+(rw?rwHtml(rw):''):'<p>💦施展了【水水噴】！としくま揮動魔杖灌溉魔法樹，樹木順利長大！</p>';$('#mgd').classList.add('on')},1900)}
+setTimeout(()=>{const k2=$('#mgk');k2&&(k2.innerHTML=bearArt('happy'));$('#mgh').textContent=bloom?'魔法樹':'施法成功';$('#mgb').innerHTML=bloom?`<p>${BLOOM_MSG[se]}</p>`+(rw?rwHtml(rw):''):'<p>💦施展了【水水噴】！としくま揮動魔杖灌溉魔法樹，樹木順利長大！</p>';$('#mgd').classList.add('on')},1900)}
 /* PWA */
 if('serviceWorker'in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 tick();evShow();loadSheets();setInterval(tick,1000);pill();bgStart();acctRender();mgDot();document.fonts&&document.fonts.ready.then(pill);
