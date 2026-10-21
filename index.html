@@ -170,7 +170,7 @@ input[type=time]{font-family:var(--serif);font-size:22px;padding:6px 14px}
 .drops i{position:absolute;top:0;width:7px;height:11px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:var(--blue);opacity:0;animation:mgdr 1s ease-in forwards}
 @keyframes mgdr{0%{transform:translateY(-10px);opacity:0}20%{opacity:.9}100%{transform:translateY(calc(300px*var(--k)));opacity:0}}
 .mgr{display:flex;align-items:center;gap:14px}.mgp{flex:1;min-width:0}
-.mgp .t{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-bottom:6px;font-variant-numeric:tabular-nums}
+.mgp .t{display:flex;justify-content:flex-start;gap:8px;font-size:12px;color:var(--mute);margin-bottom:6px;font-variant-numeric:tabular-nums}
 .mgp .b{height:8px;border-radius:4px;background:var(--mist)}.mgp .b i{display:block;height:100%;border-radius:4px;background:var(--blue);transition:width 1s var(--out)}
 .mgp .b.ok i{box-shadow:0 0 10px 2px color-mix(in srgb,var(--blue) 75%,transparent);animation:mgglow 2.4s ease-in-out infinite}
 @keyframes mgglow{50%{box-shadow:0 0 16px 4px color-mix(in srgb,var(--blue) 85%,transparent)}}
@@ -182,7 +182,11 @@ nav button.mg::after{content:"";position:absolute;top:11px;left:calc(50% + 17px)
 .zt{display:flex;gap:4px;padding:3px;border-radius:99px;background:var(--mist);margin:12px 0}
 .zt button{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 0;border-radius:99px;font-size:13px;color:var(--mute);transition:background .3s,color .3s}
 .zt button svg{width:13px;height:13px}.zt button.on{background:var(--ink);color:var(--bg)}.zt button.lk{opacity:.55}
-.zs{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-bottom:10px}
+.zs{display:flex;justify-content:flex-start;gap:6px;font-size:12px;color:var(--mute);margin-bottom:10px}.zs span{opacity:.75}
+.zy{position:relative;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:12px;-webkit-mask-image:linear-gradient(to right,#000 88%,transparent);mask-image:linear-gradient(to right,#000 88%,transparent)}.zy::-webkit-scrollbar{display:none}
+.zy button{flex:none;padding:5px 12px;border-radius:99px;font-size:12px;border:1px solid color-mix(in srgb,var(--mute) 40%,transparent);color:var(--mute)}.zy button.on{background:var(--ink);color:var(--bg);border-color:transparent}
+.zr{text-align:center;font-size:12px;color:var(--mute);margin:12px 0 2px}
+.zp{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:12px;font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums}.zp button{width:32px;height:32px;display:grid;place-items:center;border-radius:50%;color:var(--ink)}.zp button svg{width:18px;height:18px}.zp button:disabled{opacity:.3}
 .zg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .zc{aspect-ratio:1;border-radius:14px;background:var(--mist);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px;text-align:center;color:var(--ink)}
 .zc svg{width:22px;height:22px}.zc span{font-size:11px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:100%}
@@ -468,11 +472,11 @@ function nx(i){MISS.add(i.getAttribute('src'));const f=i.dataset.f?i.dataset.f.s
 let mgRO=null;
 function fitMg(){const s=$('#mgs');if(!s)return;const k=Math.min((s.clientWidth||300)/664,.62);s.style.setProperty('--k',k.toFixed(4));s.style.height=Math.round(380*k+56)+'px'}
 function rMagic(){const el=$('#magic');if(!el)return;const m=magic(),ok=m>=MG.N,s=stg(),se=season(),bl=s>=MG.BLOOM,tn=bl?'tree-bloom-'+se:['tree-seed','tree-sprout','tree-small','tree-big'][s];
-const say=ok?(bl?'可以抽獎勵了！':'可以施法了！'):`再 ${Math.ceil((MG.N-m)*10)/10}h 就能施法`,nx_=bl?'集滿可抽獎勵':'下一階段：'+STG[s+1];
+const say=ok?(bl?'可以抽獎勵了！':'可以施法了！'):`再 ${Math.ceil((MG.N-m)*10)/10}h 就能施法`;
 el.innerHTML=`<div class="card"><div class="row"><span class="name">時光樹</span><span class="lv">Lv.${s+1}<b>${STG[s]}${bl?'・'+SEAS[se]:''}</b></span></div>
 <div class="pips">${STG.map((n,i)=>(i?`<i class="ln ${i<=s?'d':''}"></i>`:'')+`<div class="pp ${i<s?'d':i===s?'c':''}"><b></b><span>${n}</span></div>`).join('')}</div>
 <div class="mgs" id="mgs" data-s="${se}"><div class="mgt" id="mgt">${art([tn],'tree',s+'|'+se)}</div><div class="mgk" id="mgk">${bearArt('idle')}</div><div class="drops" id="drp"></div><div class="bub" id="bub">${say}</div></div>
-<div class="mgr"><div class="mgp"><div class="t"><span>魔力　${nx_}</span><span>${Math.floor(m*10)/10} / ${MG.N}h</span></div><div class="b ${ok?'ok':''}"><i style="width:${Math.min(100,m/MG.N*100)}%"></i></div></div><button class="wand ${ok?'ok':''}" id="wand" aria-label="${ok?'施展魔法':'魔力不足'}">${art(['wand'],'wand')}</button></div></div>`;
+<div class="mgr"><div class="mgp"><div class="t"><span>魔力</span><span>${Math.floor(m*10)/10} / ${MG.N}h</span></div><div class="b ${ok?'ok':''}"><i style="width:${Math.min(100,m/MG.N*100)}%"></i></div></div><button class="wand ${ok?'ok':''}" id="wand" aria-label="${ok?'施展魔法':'魔力不足'}">${art(['wand'],'wand')}</button></div></div>`;
 fitMg();if(window.ResizeObserver){mgRO&&mgRO.disconnect();mgRO=new ResizeObserver(fitMg);mgRO.observe($('#mgs'))}}
 function mgDot(){const b=$('nav [data-v="time"]');b&&b.classList.toggle('mg',(Cloud.off||!!Cloud.user)&&magic()>=MG.N)}
 function rewards(){const R=EV.rw||[];if(R.length<2||!Array.isArray(R[0]))return[];const h=R[0].map(x=>x.trim().toLowerCase()),seen=new Set(),out=[];
@@ -488,7 +492,7 @@ const bloom=S.casts>=MG.BLOOM,se=season(),prev=S.casts;let rw=null;
 if(bloom){if(!EV.rwOk)return toast('獎勵載入中，請稍後再試');const P=rewards(),n=S.unlocked.length<500?P.filter(r=>!S.unlocked.includes(r.id)):[],U=P.filter(r=>S.unlocked.includes(r.id)),pk=a=>a[Math.floor(Math.random()*a.length)];rw=n.length?pk(n):U.length?pk(U):null;if(rw&&!S.unlocked.includes(rw.id))S.unlocked.push(rw.id)}
 mgBusy=true;S.casts++;save();Cloud.pushUser();mgDot();const bb=$('#bub');bb&&(bb.style.opacity=0);
 const d=$('#drp'),k=$('#mgk');d&&(d.innerHTML=[...Array(7)].map((_,i)=>`<i style="left:${14+i*11}%;animation-delay:${i*.12}s"></i>`).join(''));k&&(k.innerHTML=bearArt('cast',prev));
-setTimeout(()=>{rMagic();rZukan();const t=$('#mgt');t&&t.classList.add('pop')},1100);
+setTimeout(()=>{rMagic();ZG.reward=undefined;rZukan();const t=$('#mgt');t&&t.classList.add('pop')},1100);
 setTimeout(()=>{const k2=$('#mgk');k2&&(k2.innerHTML=bearArt('happy'));$('#mgh').textContent=bloom?'時光樹':'施法成功';$('#mgb').innerHTML=bloom?`<p>${BLOOM_MSG[se]}</p>`+(rw?rwHtml(rw):''):'<p>💦施展了【水水噴】！熊熊揮動魔杖灌溉時光樹，樹木順利長大！</p>';$('#mgd').classList.add('on')},1900)}
 /* ===== 時光頁與圖鑑 ===== */
 const TGATE=()=>`<h2>時光</h2><p class="sub">登入後，種下屬於你的時光樹。</p><div class="card"><div class="name">登入後開始養成</div><p class="hint" style="margin:12px 0 18px">登入並打卡後，睡眠時數會化為魔力，讓時光樹一路長大。<br>・樹盛開後施法，可以抽到加藤史帆的影音與照片<br>・抽到的獎勵收進圖鑑，隨時重看<br>資料只屬於你，換手機也看得到。</p><button class="btn dark" id="gLogin" style="width:100%">Google 登入</button></div>`;
@@ -510,7 +514,7 @@ const memMedia=c=>!c.url?'':c.ty==='photo'?`<img class="mp" src="${esc(c.url)}" 
 const memHtml=(c,td)=>`<div class="mhd">記憶顯影</div><div class="orn"><i></i>${ZI.spark}<i></i></div><h3>${td?'歷史上的今天':'出道第 '+c.day+' 天的足跡'}</h3>${c.date?`<div class="mdt">${esc(c.date)}</div>`:''}${c.title?`<div class="mtt">${esc(c.title)}</div>`:''}${memMedia(c)}${c.text?`<p class="mtx">${esc(c.text)}</p>`:''}${crHtml(c.credit)}`;
 let pendMem=null;
 function memOpen(c,re,td){$('#memb').innerHTML=memHtml(c,td);$('#memOk').textContent=re?'關閉':'收進圖鑑';$('#memd').classList.add('on');$('#memd .paper').scrollTop=0}
-function memShow(){if(!pendMem)return;const c=pendMem;pendMem=null;memOpen(c,false);cur==='time'&&rZukan()}
+function memShow(){if(!pendMem)return;const c=pendMem;pendMem=null;memOpen(c,false);ZG.memory=undefined;cur==='time'&&rZukan()}
 function memClose(){$('#memd').classList.remove('on');const a=$('#memb audio');a&&a.pause();setTimeout(()=>{$('#memb').innerHTML=''},500)}
 $('#memOk').onclick=memClose;$('#memd').onclick=e=>{if(e.target.id==='memd')return memClose();const v=e.target.closest('.mv');if(v){const u=v.dataset.u;memClose();play({url:u})}};
 addEventListener('keydown',e=>{if(e.key==='Escape')memClose()});
@@ -518,14 +522,24 @@ ZI.chev=zsv('<path d="M9 6l6 6-6 6"/>');
 function rToday(){const el=$('#tdy');if(!el)return;const d=new Date(),L=memPool().filter(c=>c.mo===d.getMonth()+1&&c.dd===d.getDate()).sort((a,b)=>a.yr-b.yr);
 el.innerHTML=L.length?`<div class="card"><div class="row"><span class="name">歷史上的今天</span><span class="tdd">${d.getMonth()+1} 月 ${d.getDate()} 日</span></div><div class="tl">${L.map(c=>`<button class="tr" data-t="${c.day}">${ZI[c.ty||'text']}<div><small>${c.yr||''}</small><span>${esc(c.title||'未命名')}</span></div>${ZI.chev}</button>`).join('')}</div></div>`:''}
 const ZD={reward:'時光樹盛開後，魔力每滿 50h 施法一次，就能抽到隨機卡片。',memory:'連續打卡天數與平假名櫸/日向坂結成天數同步時，就會收到記憶卡片，重溫她們一路走來的足跡。',item:'解鎖連續打卡成就，收集各式布景與配飾來裝扮畫面。（即將開放）'};
-function rZukan(){const el=$('#zk');if(!el)return;let body='';
-if(ZK==='reward'){const P=rewards();if(!EV.rwOk||(!P.length&&!SF.rw))body='<div class="empty">載入中…</div>';else{const U=new Set(S.unlocked),n=P.filter(r=>U.has(r.id)).length;
-body=P.length?`<div class="zs"><span>已收集</span><span>${n} / ${P.length}</span></div><div class="zg">${P.map(r=>U.has(r.id)?`<button class="zc" data-r="${esc(r.id)}">${ZI[r.type]}<span>${esc(r.title||'未命名')}</span></button>`:`<div class="zc lk">${ZI.lock}<span>？</span></div>`).join('')}</div>`:'<div class="empty">目前沒有可收集的獎勵</div>'}}
-if(ZK==='memory'){const P=memPool();if(!EV.memOk||(!P.length&&!SF.mem))body='<div class="empty">載入中…</div>';else{const U=new Set(S.memories),n=P.filter(c=>U.has(c.day)).length;
-body=P.length?`<div class="zs"><span>已收集</span><span>${n} / ${P.length}</span></div><div class="zg">${P.map(c=>U.has(c.day)?`<button class="zc" data-m="${c.day}">${ZI[c.ty||'text']}<small>第 ${c.day} 天</small><span>${esc(c.title||'未命名')}</span></button>`:`<div class="zc lk">${ZI.lock}<span>第 ${c.day} 天</span></div>`).join('')}</div>`:'<div class="empty">目前沒有可收集的記憶</div>'}}
-if(ZK==='item')body=`<div class="zl">${ZI.lock}</div>`;
-el.innerHTML=`<div class="card"><div class="row"><span class="name">圖鑑</span></div><div class="zt">${[['reward','獎勵',1],['memory','記憶',1],['item','道具',0]].map(([k,n,o])=>`<button data-zk="${k}" class="${k===ZK?'on':''}${o?'':' lk'}">${o?'':ZI.lock}${n}</button>`).join('')}</div><p class="zd">${ZD[ZK]}</p>${body}</div>`}
+let ZY='all';const ZG={};
+ZI.chevl=zsv('<path d="M15 6l-6 6 6 6"/>');
+function rZukan(){const el=$('#zk');if(!el)return;const k=ZK;let body='',chips='';
+if(k==='reward'||k==='memory'){const mem=k==='memory';let P=mem?memPool():rewards();
+if(!(mem?EV.memOk&&(P.length||SF.mem):EV.rwOk&&(P.length||SF.rw)))body='<div class="empty">載入中…</div>';
+else if(!P.length)body=`<div class="empty">目前沒有可收集的${mem?'記憶':'獎勵'}</div>`;
+else{if(mem){const ys=[...new Set(P.map(c=>c.yr).filter(y=>y>0))].sort((a,b)=>a-b);if(ZY!=='all'&&!ys.includes(ZY))ZY='all';
+chips=`<div class="zy">${['all',...ys].map(y=>`<button data-zy="${y}" class="${y===ZY?'on':''}">${y==='all'?'全部':y}</button>`).join('')}</div>`;if(ZY!=='all')P=P.filter(c=>c.yr===ZY)}
+const U=new Set(mem?S.memories:S.unlocked),col=mem?P.filter(c=>U.has(c.day)):S.unlocked.map(id=>P.find(r=>r.id===id)).filter(Boolean),lock=P.filter(x=>!U.has(mem?x.day:x.id));
+const cells=[...col.map(x=>mem?`<button class="zc" data-m="${x.day}">${ZI[x.ty||'text']}<small>第 ${x.day} 天</small><span>${esc(x.title||'未命名')}</span></button>`:`<button class="zc" data-r="${esc(x.id)}">${ZI[x.type]}<span>${esc(x.title||'未命名')}</span></button>`),...lock.slice(0,3).map(x=>`<div class="zc lk">${ZI.lock}<span>${mem?'第 '+x.day+' 天':'？'}</span></div>`)];
+const per=12,pages=Math.max(1,Math.ceil(cells.length/per));let pg=ZG[k];if(pg===undefined)pg=Math.floor((col.length-1)/per);pg=Math.min(Math.max(pg,0),pages-1);ZG[k]=pg;const rest=lock.length-3;
+body=`<div class="zs">已收集 ${col.length} / ${P.length}${mem&&ZY!=='all'?`<span>（${ZY} 年）</span>`:''}</div><div class="zg">${cells.slice(pg*per,pg*per+per).join('')}</div>`+(pg===pages-1&&rest>0?`<div class="zr">還有 ${rest} 張尚未解鎖</div>`:'')+(pages>1?`<div class="zp"><button data-zp="-1" aria-label="上一頁"${pg<1?' disabled':''}>${ZI.chevl}</button><span>${pg+1} / ${pages}</span><button data-zp="1" aria-label="下一頁"${pg>=pages-1?' disabled':''}>${ZI.chev}</button></div>`:'')}}
+if(k==='item')body=`<div class="zl">${ZI.lock}</div>`;
+el.innerHTML=`<div class="card"><div class="row"><span class="name">圖鑑</span></div><div class="zt">${[['reward','獎勵',1],['memory','記憶',1],['item','道具',0]].map(([q,n,o])=>`<button data-zk="${q}" class="${q===k?'on':''}${o?'':' lk'}">${o?'':ZI.lock}${n}</button>`).join('')}</div><p class="zd">${ZD[k]}</p>${chips}${body}</div>`;
+const row=el.querySelector('.zy'),a=row&&row.querySelector('.on');if(row&&a)row.scrollLeft=a.offsetLeft-(row.clientWidth-a.clientWidth)/2}
 $('#tBody').onclick=e=>{if(e.target.closest('#wand'))return cast();if(e.target.closest('#gLogin'))return privOpen();
+const zp=e.target.closest('[data-zp]');if(zp){if(!zp.disabled){ZG[ZK]=(ZG[ZK]||0)+ +zp.dataset.zp;rZukan()}return}
+const zy=e.target.closest('[data-zy]');if(zy){ZY=zy.dataset.zy==='all'?'all':+zy.dataset.zy;ZG.memory=0;return rZukan()}
 const z=e.target.closest('[data-zk]');if(z){ZK=z.dataset.zk;return rZukan()}
 const c=e.target.closest('.zc[data-r]');if(c){const r=rewards().find(x=>x.id===c.dataset.r);if(r){$('#mgh').textContent=r.title||'獎勵';$('#mgb').innerHTML=rwHtml(r);$('#mgd').classList.add('on')}}
 const m=e.target.closest('.zc[data-m]');if(m){const x=memPool().find(y=>y.day==m.dataset.m);x&&memOpen(x,true)}
