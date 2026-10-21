@@ -75,14 +75,14 @@ h2{font:500 28px/1.3 var(--serif);letter-spacing:.12em;margin:8px 0 4px}
 .rl{display:flex;align-items:center;gap:14px}.dot{width:10px;height:10px;border-radius:50%;flex:none;border:1px solid var(--mute);box-sizing:border-box}
 .dot.ok{background:#7FA38F;border:0;box-shadow:0 0 0 4px rgba(127,163,143,.2)}.dot.lo{background:#C9A57A;border:0;box-shadow:0 0 0 4px rgba(201,165,122,.2)}
 .hv{font:500 16px var(--serif);letter-spacing:.02em;margin-right:2px}.lg{display:flex;gap:6px 12px;justify-content:flex-start;margin:14px 0 0;font-size:11px;color:var(--mute)}.lg .dot{display:inline-block;margin-right:6px;vertical-align:-1px}
-#priv,#fix,#acc,#mgd{position:fixed;inset:0;z-index:25;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--veil);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);opacity:0;visibility:hidden;transition:opacity .45s var(--out),visibility 0s .45s}
-#priv.on,#fix.on,#acc.on,#mgd.on{opacity:1;visibility:visible;transition:opacity .45s var(--out)}
-#priv .box,#fix .box,#acc .box,#mgd .box{width:min(100%,380px);padding:34px 28px 26px;border-radius:28px;background:var(--glass);border:1px solid var(--line);box-shadow:var(--sh);transform:translateY(36px) scale(.94);transition:transform .8s var(--sp)}
-#priv.on .box,#fix.on .box,#acc.on .box,#mgd.on .box{transform:none}
-#priv h3,#fix h3,#acc h3,#mgd h3{font:500 20px/1.5 var(--serif);letter-spacing:.14em;margin:0 0 14px}
-#priv p,#fix p,#acc p,#mgd p{font-size:13.5px;line-height:2;color:var(--mute);margin:0 0 14px}
-#priv .pr,#mgd .pr{display:flex;gap:16px;font-size:13px;line-height:1.8;padding:11px 0;border-top:1px solid var(--line)}#priv .pr span{flex:none;width:3.2em;letter-spacing:.14em;color:var(--mute)}
-#priv .tools,#fix .tools,#acc .tools,#mgd .tools{margin-top:22px}#priv .btn,#fix .btn,#acc .btn,#mgd .btn{flex:1;padding:13px 16px}
+#priv,#fix,#acc,#mgd,#memd{position:fixed;inset:0;z-index:25;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--veil);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);opacity:0;visibility:hidden;transition:opacity .45s var(--out),visibility 0s .45s}
+#priv.on,#fix.on,#acc.on,#mgd.on,#memd.on{opacity:1;visibility:visible;transition:opacity .45s var(--out)}
+#priv .box,#fix .box,#acc .box,#mgd .box,#memd .box{width:min(100%,380px);padding:34px 28px 26px;border-radius:28px;background:var(--glass);border:1px solid var(--line);box-shadow:var(--sh);transform:translateY(36px) scale(.94);transition:transform .8s var(--sp)}
+#priv.on .box,#fix.on .box,#acc.on .box,#mgd.on .box,#memd.on .box{transform:none}
+#priv h3,#fix h3,#acc h3,#mgd h3,#memd h3{font:500 20px/1.5 var(--serif);letter-spacing:.14em;margin:0 0 14px}
+#priv p,#fix p,#acc p,#mgd p,#memd p{font-size:13.5px;line-height:2;color:var(--mute);margin:0 0 14px}
+#priv .pr,#mgd .pr,#memd .pr{display:flex;gap:16px;font-size:13px;line-height:1.8;padding:11px 0;border-top:1px solid var(--line)}#priv .pr span{flex:none;width:3.2em;letter-spacing:.14em;color:var(--mute)}
+#priv .tools,#fix .tools,#acc .tools,#mgd .tools,#memd .tools{margin-top:22px}#priv .btn,#fix .btn,#acc .btn,#mgd .btn,#memd .btn{flex:1;padding:13px 16px}
 .mav{width:44px;height:44px;border-radius:50%;background:var(--mist) center/cover;display:grid;place-items:center;font:500 16px var(--serif);color:var(--mute);flex:none}.lft{display:flex;align-items:center;gap:14px}
 .ev{height:0;margin:-34px 0 34px;text-align:center;font-size:12.5px;letter-spacing:.18em;color:var(--mute)}
 #acct{transition:transform .5s var(--sp),opacity .35s ease}#acct.hide{opacity:0;pointer-events:none}
@@ -153,7 +153,7 @@ input[type=time]{font-family:var(--serif);font-size:22px;padding:6px 14px}
 #back:hover{opacity:1}#back:active{transform:scale(.86)}
 #toast{position:fixed;left:50%;top:max(20px,env(safe-area-inset-top));transform:translate(-50%,-90px);z-index:30;padding:12px 22px;border-radius:99px;background:var(--ink);color:var(--bg);font-size:13px;letter-spacing:.08em;transition:transform .7s var(--sp);max-width:90vw}
 #toast.on{transform:translate(-50%,0)}
-.mgs{--k:.4;--gnd:color-mix(in srgb,var(--blue) 16%,transparent);position:relative;overflow:hidden;border-radius:16px;margin:10px 0 14px;height:210px;background:linear-gradient(to bottom,color-mix(in srgb,var(--blue) 16%,transparent),transparent 78%)}
+.mgs{--k:.4;--gnd:color-mix(in srgb,var(--blue) 16%,transparent);position:relative;overflow:hidden;border-radius:16px;margin:10px 0 14px;height:210px;background:linear-gradient(to bottom,color-mix(in srgb,var(--blue) 9%,transparent),transparent 62%)}
 .mgs::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-28px;height:70px;border-radius:50%;background:var(--gnd)}
 .mgs[data-s=spring]{--gnd:rgba(232,190,202,.32)}.mgs[data-s=summer]{--gnd:rgba(160,190,150,.30)}.mgs[data-s=autumn]{--gnd:rgba(226,192,144,.34)}.mgs[data-s=winter]{--gnd:rgba(255,255,255,.95)}
 .mgt{position:absolute;z-index:1;left:0;bottom:18px;width:calc(360px*var(--k));height:calc(360px*var(--k));transform-origin:50% 100%}
@@ -179,6 +179,24 @@ input[type=time]{font-family:var(--serif);font-size:22px;padding:6px 14px}
 nav button.mg::after{content:"";position:absolute;top:11px;left:calc(50% + 17px);width:7px;height:7px;border-radius:50%;background:var(--blue)}
 .rec small svg{vertical-align:-3px;margin-right:2px}
 #mgd .box img{max-height:50vh;object-fit:contain}
+.zt{display:flex;gap:4px;padding:3px;border-radius:99px;background:var(--mist);margin:12px 0}
+.zt button{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 0;border-radius:99px;font-size:13px;color:var(--mute);transition:background .3s,color .3s}
+.zt button svg{width:13px;height:13px}.zt button.on{background:var(--ink);color:var(--bg)}.zt button.lk{opacity:.55}
+.zs{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-bottom:10px}
+.zg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.zc{aspect-ratio:1;border-radius:14px;background:var(--mist);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px;text-align:center;color:var(--ink)}
+.zc svg{width:22px;height:22px}.zc span{font-size:11px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:100%}
+.zc.lk{background:none;border:1px dashed color-mix(in srgb,var(--mute) 45%,transparent);color:var(--mute)}
+#mgd a{color:var(--blue);text-decoration:underline;text-underline-offset:2px}
+#memd .box.paper{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .33 0 0 0 0 .18 .5 0 0 0 -.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.008 .012' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .42 0 0 0 0 .22 .7 0 0 0 -.26'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3C/svg%3E"),radial-gradient(ellipse at 50% 30%,rgba(255,252,242,.75),transparent 72%),#F1E8D2;color:#3A342A;border:1px solid #D6C8A6;box-shadow:inset 0 0 38px rgba(150,115,60,.3),0 18px 40px -14px rgba(60,45,20,.4);max-height:86vh;overflow:auto;text-align:center}
+#memd .paper .mhd{font-size:11px;letter-spacing:.35em;color:#8A7C60;margin-bottom:8px}
+#memd .paper .orn{display:flex;align-items:center;gap:8px;margin:0 auto 10px;max-width:220px;color:#A8987A}#memd .paper .orn i{flex:1;height:1px;background:#D6C8A6}#memd .paper .orn svg{width:14px;height:14px}
+#memd .paper h3{color:#3A342A;margin:0}#memd .paper .mdt{font-size:11px;color:#8A7C60;margin:2px 0 10px}#memd .paper .mtt{font-size:14px;font-weight:500;margin-bottom:10px;color:#3A342A}
+#memd .paper .mp{width:100%;max-height:36vh;object-fit:cover;border-radius:10px;border:1px solid #D6C8A6;display:block;margin:0 0 10px}
+#memd .paper .mv{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:34px 0;border-radius:10px;background:rgba(150,125,80,.14);border:1px solid #D6C8A6;color:#5A5243;margin-bottom:10px}#memd .paper .mv svg{width:20px;height:20px}
+#memd .paper p,#memd .paper .hint{color:#8A7C60}#memd .paper .mtx{color:#5A5243;font-size:12.5px;line-height:1.7;text-align:left;white-space:pre-line;margin:6px 0}
+#memd .paper a{color:#6F6046;text-decoration:underline;text-underline-offset:2px}#memd .paper .btn.dark{background:#3A342A;color:#F1E8D2}
+.zc small{font-size:10px;color:var(--mute)}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation:none!important}}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -213,10 +231,11 @@ const ZEN_CONFIG={
 </section>
 <section class="view" id="members"><div class="wrap" id="mBody"></div></section>
 <section class="view" id="history"><div class="wrap" id="hBody"></div></section>
+<section class="view" id="time"><div class="wrap" id="tBody"></div></section>
 </main>
 
 <nav id="nav" aria-label="主導航"><span id="pill"></span>
-  <button data-v="home" class="on">首頁</button><button data-v="members">成員</button><button data-v="history">歷史</button>
+  <button data-v="home" class="on">首頁</button><button data-v="members">成員</button><button data-v="history">紀錄</button><button data-v="time">時光</button>
 </nav>
 
 <div id="player" aria-label="影片播放器"><video id="vid" playsinline autoplay></video><button id="back" aria-label="返回首頁">✕</button></div>
@@ -227,6 +246,7 @@ const ZEN_CONFIG={
 <div id="fix" role="dialog" aria-modal="true" aria-labelledby="ftt"><div class="box"><h3 id="ftt">補打卡</h3><p>填入實際的時間。清空欄位再儲存，會刪除該筆紀錄。</p><label class="fl">🌙 晚安<input type="datetime-local" id="fs"></label><label class="fl">☀️ 早安<input type="datetime-local" id="fw"></label><div class="tools"><button class="btn" id="fNo">取消</button><button class="btn dark" id="fOk">儲存</button></div></div></div>
 <div id="acc" role="dialog" aria-modal="true" aria-labelledby="atl"><div class="box"><h3 id="atl">帳號</h3><p id="accMail" style="margin-bottom:10px"></p><p>刪除後，雲端上你的睡眠與打卡紀錄與登入帳號會被永久移除，無法復原。共用的影片與背景不受影響。</p><div class="tools"><button class="btn" id="accNo">關閉</button><button class="btn dark" id="accOut">登出</button></div><button class="btn" id="accDel" style="width:100%;margin-top:10px;color:#B5655C">刪除我的資料與帳號</button></div></div>
 <div id="mgd" role="dialog" aria-modal="true" aria-labelledby="mgh"><div class="box"><h3 id="mgh"></h3><div id="mgb"></div><div class="tools"><button class="btn dark" id="mgOk">好</button></div></div></div>
+<div id="memd" role="dialog" aria-modal="true"><div class="box paper"><div id="memb"></div><div class="tools"><button class="btn dark" id="memOk">收進圖鑑</button></div></div></div>
 <button id="acct" hidden aria-label="帳號"></button>
 <div id="toast" role="status"></div>
 
@@ -239,8 +259,9 @@ const Cloud={user:null,admin:false,off:true,ready:false,pushUser(){},pushCfg(){}
 const PRESET={members:[{id:'m1',name:'成員 A',on:true},{id:'m2',name:'成員 B',on:true},{id:'m3',name:'成員 C',on:true}],
  videos:[/* {id:'v1',mid:'m1',period:'wake',name:'標題',url:'https://…/a.mp4'} */],
  bgs:[/* 'https://…/photo1.jpg' */],events:[]};
-let S={...PRESET,log:[],off:[],goal:7,casts:0,unlocked:[],base:0};
+let S={...PRESET,log:[],off:[],goal:7,casts:0,unlocked:[],base:0,memories:[]};
 try{const x=JSON.parse(localStorage.getItem('zen-ritual'));if(x)S={...S,...x}}catch(e){}
+if(!Array.isArray(S.memories))S.memories=[];
 const isOn=m=>!S.off.includes(m.id);
 const dedupe=L=>{const m=new Map();L.slice().sort((a,b)=>a.ts-b.ts).forEach(l=>m.set(dkey(new Date(l.ts))+l.type,l));const a=[...m.values()].sort((x,y)=>x.ts-y.ts);return a.filter((l,i)=>!(l.type==='sleep'&&a[i+1]&&a[i+1].type==='sleep'&&a[i+1].ts-l.ts<6*36e5)).sort((x,y)=>y.ts-x.ts)};S.log=dedupe(S.log);
 const save=()=>{try{localStorage.setItem('zen-ritual',JSON.stringify(S))}catch(e){}};
@@ -250,11 +271,11 @@ let tt;const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on')
 const W=['日','一','二','三','四','五','六'];
 function tick(){const d=new Date();$('#clk').innerHTML=`${pad(d.getHours())}<i style="opacity:${d.getSeconds()%2?.25:1}">:</i>${pad(d.getMinutes())}`;$('#sec').textContent=pad(d.getSeconds());$('#dt').textContent=`${d.getFullYear()}．${pad(d.getMonth()+1)}．${pad(d.getDate())}　週${W[d.getDay()]}`;if(dkey(d)!==lastD){lastD=dkey(d);evShow()}}
 let lastD='';
-let EV={ev:[],bd:[],rw:[],rwOk:!ZEN_CONFIG.rewardsCsv},evL=[],evI=0,evT;
+let EV={ev:[],bd:[],rw:[],rwOk:!ZEN_CONFIG.rewardsCsv,mem:[],memOk:!ZEN_CONFIG.memoryCsv},evL=[],evI=0,evT;
 try{EV=JSON.parse(localStorage.getItem('zen-ev'))||EV}catch(e){}
 const parseCsv=t=>{const R=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const h=t[i];if(q){if(h==='"'){if(t[i+1]==='"'){c+='"';i++}else q=false}else c+=h}else if(h==='"')q=true;else if(h===','){r.push(c);c=''}else if(h==='\n'||h==='\r'){if(h==='\r'&&t[i+1]==='\n')i++;r.push(c);c='';R.push(r);r=[]}else c+=h}if(c||r.length){r.push(c);R.push(r)}
   return R.slice(1).filter(x=>x.length>=4&&+x[0]>0).map(x=>({m:+x[0],d:+x[1],n:x[2].trim(),y:+x[3]}))};
-async function loadSheets(){for(const[k,u]of[['ev',ZEN_CONFIG.eventsCsv],['bd',ZEN_CONFIG.birthdaysCsv],['rw',ZEN_CONFIG.rewardsCsv]]){if(!u)continue;try{const r=await fetch(u);if(r.ok){EV[k]=parseCsv(await r.text());if(k==='rw')EV.rwOk=true}}catch(e){console.warn(e)}}
+async function loadSheets(){await Promise.all([['ev',ZEN_CONFIG.eventsCsv],['bd',ZEN_CONFIG.birthdaysCsv],['rw',ZEN_CONFIG.rewardsCsv],['mem',ZEN_CONFIG.memoryCsv]].map(async([k,u])=>{if(!u)return;try{const r=await fetch(u);if(!r.ok)return;EV[k]=parseCsv(await r.text());if(k==='rw')EV.rwOk=true;if(k==='mem'){EV.memOk=true;memCheck(false)}if(cur==='time')rZukan()}catch(e){console.warn(e)}}));
   try{localStorage.setItem('zen-ev',JSON.stringify(EV))}catch(e){}evShow()}
 function evSet(L){const e=$('#ev');if(JSON.stringify(L)===JSON.stringify(evL))return;evL=L;evI=0;clearInterval(evT);e.style.opacity=1;e.textContent=L[0]||'';
   if(L.length>1)evT=setInterval(()=>{e.style.opacity=0;setTimeout(()=>{evI=(evI+1)%evL.length;e.textContent=evL[evI];e.style.opacity=1},450)},4500)}
@@ -272,7 +293,7 @@ addEventListener('resize',pill);
 /* player */
 let curURL=null;
 function play(v){curURL=v.blob?URL.createObjectURL(v.blob):v.url;const el=$('#vid');el.src=curURL;el.loop=false;$('#player').classList.add('on');el.play().catch(()=>{})}
-function stop(){const el=$('#vid');el.pause();$('#player').classList.remove('on');setTimeout(()=>{el.removeAttribute('src');el.load();if(curURL&&curURL.startsWith('blob:'))URL.revokeObjectURL(curURL);curURL=null},700)}
+function stop(){const el=$('#vid');el.pause();$('#player').classList.remove('on');setTimeout(()=>{el.removeAttribute('src');el.load();if(curURL&&curURL.startsWith('blob:'))URL.revokeObjectURL(curURL);curURL=null},700);setTimeout(memShow,400)}
 $('#back').onclick=stop;$('#vid').onerror=()=>{if($('#player').classList.contains('on')){toast('影片無法載入，請檢查網址');stop()}};$('#vid').onclick=e=>{e.target.paused?e.target.play():e.target.pause()};
 addEventListener('keydown',e=>{if(e.key==='Escape')stop()});
 const FEST=[['newyear','元旦',1,1],['setsubun','節分',2,3],['valentine','情人節',2,14],['white','白色情人節',3,14],['tanabata','七夕（日本）',7,7],['halloween','萬聖節',10,31],['xmaseve','平安夜',12,24],['xmas','聖誕節',12,25],['nye','跨年',12,31]];
@@ -283,10 +304,10 @@ function pick(type){const on=new Set(S.members.filter(isOn).map(m=>m.id)),ok=v=>
   let pool=fe?S.videos.filter(v=>v.fest===fe&&ok(v)):[];if(!pool.length)pool=S.videos.filter(v=>!v.fest&&ok(v));if(!pool.length)return null;return pool[Math.floor(Math.random()*pool.length)]}
 function go(type,btn,ev){const v=pick(type);if(!v){toast(S.videos.length?'已勾選的成員沒有符合時段的影片':'先到「設定」頁加入影片');return}
   if(btn&&ev){const r=btn.getBoundingClientRect(),s=Math.max(r.width,r.height)*2,i=document.createElement('i');i.className='ripple';i.style.cssText=`width:${s}px;height:${s}px;left:${ev.clientX-r.left-s/2}px;top:${ev.clientY-r.top-s/2}px`;btn.appendChild(i)}
-  S.log=cap(dedupe([{id:Date.now(),type,ts:Date.now(),mid:v.mid,vid:v.id},...S.log]));save();Cloud.pushUser();mgDot();setTimeout(()=>play(v),btn?180:0)}
+  S.log=cap(dedupe([{id:Date.now(),type,ts:Date.now(),mid:v.mid,vid:v.id},...S.log]));save();Cloud.pushUser();mgDot();pendMem=(Cloud.off||Cloud.user)?memCheck(true):null;setTimeout(()=>play(v),btn?180:0)}
 $$('[data-go]').forEach(b=>b.onclick=e=>go(b.dataset.go,b,e));
 /* views */
-function render(){mgDot();const f=document.activeElement;if(f&&/^(INPUT|SELECT|TEXTAREA)$/.test(f.tagName)&&$('#'+cur).contains(f))return;if(cur==='members')rMembers();if(cur==='settings')rSettings();if(cur==='history')rHistory()}
+function render(){mgDot();const f=document.activeElement;if(f&&/^(INPUT|SELECT|TEXTAREA)$/.test(f.tagName)&&$('#'+cur).contains(f))return;if(cur==='members')rMembers();if(cur==='settings')rSettings();if(cur==='history')rHistory();if(cur==='time')rTime()}
 /* background slideshow */
 const cu=u=>u.replace(/['"()\s]/g,c=>encodeURIComponent(c)),okU=u=>/^https?:\/\/\S+$/i.test(u);
 let bi=-1,bt,ly=0;
@@ -327,9 +348,9 @@ function settingsClick(e){const a=e.target.closest('[data-act]');if(!a)return;co
   else if(act==='mav'){const m=S.members.find(x=>x.id===id),u=prompt('成員頭像圖片網址（留空可清除）',m.av||'');if(u===null)return;if(u&&!okU(u))return toast('請輸入 http(s) 開頭的圖片網址');m.av=u||'';cfgSave()}};
 /* cloud hooks (called by the Firebase module) */
 function applyCfg(c){const g=()=>JSON.stringify([S.members,S.videos,S.bgs,S.events]),o=g(),ob=JSON.stringify(S.bgs);S.members=c.members||[];S.videos=c.videos||[];S.bgs=c.bgs||[];S.events=c.events||[];if(g()===o)return;save();if(JSON.stringify(S.bgs)!==ob)bgStart();render();evShow()}
-function applyUser(d){const r=d||{},m=new Map();[...(r.log||[]),...S.log].forEach(l=>m.set(l.id,l));if(typeof r.casts==='number'&&r.casts>S.casts)S.casts=r.casts;if(typeof r.base==='number'&&r.base>S.base)S.base=r.base;if(Array.isArray(r.unlocked))S.unlocked=[...new Set([...r.unlocked,...S.unlocked])].slice(0,500);
+function applyUser(d){const r=d||{},m=new Map();[...(r.log||[]),...S.log].forEach(l=>m.set(l.id,l));if(typeof r.casts==='number'&&r.casts>S.casts)S.casts=r.casts;if(typeof r.base==='number'&&r.base>S.base)S.base=r.base;if(Array.isArray(r.unlocked))S.unlocked=[...new Set([...r.unlocked,...S.unlocked])].slice(0,500);if(Array.isArray(r.memories))S.memories=[...new Set([...r.memories,...S.memories])].filter(x=>x>0).sort((a,b)=>a-b).slice(0,4000);
   const log=cap(dedupe([...m.values()]));
-  S.log=log;if(r.off)S.off=r.off;if(r.goal)S.goal=r.goal;save();const rl=r.log||[];if(!d||log.length!==rl.length||log.some((l,i)=>l.id!==rl[i].id)||S.casts!==(r.casts||0)||S.unlocked.length!==(r.unlocked||[]).length||S.base!==(r.base||0))Cloud.pushUser();render()}
+  S.log=log;if(r.off)S.off=r.off;if(r.goal)S.goal=r.goal;save();const rl=r.log||[];if(!d||log.length!==rl.length||log.some((l,i)=>l.id!==rl[i].id)||S.casts!==(r.casts||0)||S.unlocked.length!==(r.unlocked||[]).length||S.base!==(r.base||0)||S.memories.length!==(r.memories||[]).length)Cloud.pushUser();memCheck(false);render()}
 function acctRender(){const b=$('#acct'),u=Cloud.user;b.hidden=Cloud.off;b.classList.toggle('av',!!u);b.innerHTML=u?(u.photoURL?`<img src="${esc(u.photoURL)}" alt="" referrerpolicy="no-referrer">`:esc((u.displayName||u.email||'?')[0].toUpperCase())):'Google 登入'}
 const priv=$('#priv'),privOpen=()=>{priv.classList.add('on');setTimeout(()=>$('#pOk').focus(),300)},privClose=()=>priv.classList.remove('on');
 $('#pNo').onclick=privClose;$('#pOk').onclick=()=>{privClose();Cloud.login&&Cloud.login()};
@@ -379,7 +400,7 @@ function hUpdate(){const D=hData();
   $('#hl').innerHTML=D.rows.length?D.rows.map(d=>{const dt=new Date(d.k+'T00:00:00'),sl=d.s||d.logs.find(l=>l.type==='sleep'),wl=d.w||d.logs.find(l=>l.type==='wake'),sv=sl&&S.videos.find(x=>x.id===sl.vid),wv=wl&&S.videos.find(x=>x.id===wl.vid),st=d.h==null?'':tc(d.h),
     t=d.s&&d.w?`${hm(d.s.ts)} → ${hm(d.w.ts)}`:d.logs.slice().reverse().map(l=>(l.type==='wake'?IC.w:IC.m)+' '+hm(l.ts)).join('　');
     return`<div class="rec" data-k="${d.k}"><div class="rl"><i class="dot ${st}"></i><div><b>${dt.getMonth()+1}月${dt.getDate()}日 週${W[dt.getDay()]}</b><br><small>${t}</small></div></div><span class="rr"><span class="hv">${d.h!=null?d.h.toFixed(1)+'h':'—'}</span>${pb(sv,'m','晚安')}${pb(wv,'w','早安')}<button class="ed" aria-label="編輯時間">${IC.e}</button></span></div>`}).join(''):'<div class="empty">此區間沒有紀錄<br>回到首頁，打下第一個卡。</div>'}
-const GATE=()=>`<h2>歷史</h2><p class="sub">登入後解鎖你的睡眠紀錄與統計。</p>
+const GATE=()=>`<h2>紀錄</h2><p class="sub">登入後解鎖你的睡眠紀錄與統計。</p>
 <div class="gate"><div class="pv" aria-hidden="true">
 <div class="stats"><div class="card stat"><b>7.2<small>h</small></b><span>平均睡眠</span></div><div class="card stat"><b>18<small>天</small></b><span>打卡天數</span></div><div class="card stat"><b>86<small>%</small></b><span>目標達成率</span></div></div>
 <div class="card"><div class="name">睡眠趨勢</div><svg viewBox="0 0 300 120" preserveAspectRatio="none" style="width:100%;height:150px;margin-top:14px"><path d="M0 70C30 40 50 90 80 60S130 30 160 55S220 95 250 50S285 40 300 45V120H0Z" fill="var(--blue)" opacity=".25"/><path d="M0 70C30 40 50 90 80 60S130 30 160 55S220 95 250 50S285 40 300 45" fill="none" stroke="var(--blue)" stroke-width="2"/></svg></div>
@@ -396,13 +417,12 @@ function rHistory(){hc&&(hc.destroy(),hc=null);
   info=d=>{const k=dkey(d),h=sh.get(k),L=dl(k);return h!=null?{has:1,c:tc(h),t:+h.toFixed(1)}:L.length?{has:1,c:'t0',t:L.some(l=>l.type==='wake')?IC.w:IC.m}:{has:0,c:'',t:''}};
   const wk=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);const p=new Date(d);p.setDate(p.getDate()-1);const a=info(d),b=info(p);return`<div class="day ${a.c} ${i>0&&a.has&&b.has?'lk':''}"><i>${a.t}</i>${W[d.getDay()]}</div>`}).join('');
   const MS=[7,14,30,50,100],nx=MS.find(x=>x>n),pg=nx?`<div class="pg"><div class="t"><span>下一個目標：連續 ${nx} 天</span><span>再 ${nx-n} 天</span></div><div class="b"><i id="pgb" data-w="${Math.round(n/nx*100)}%" style="width:0"></i></div></div>`:`<div class="pg"><div class="t"><span>已達成所有目標</span><span>${n} 天</span></div><div class="b"><i style="width:100%"></i></div></div>`;
-  $('#hBody').innerHTML=`<h2>歷史</h2><p class="sub">睡眠時數以「晚安」到「早安」之間的時間估算。</p>
-  <div id="magic"></div>
+  $('#hBody').innerHTML=`<h2>紀錄</h2><p class="sub">睡眠時數以「晚安」到「早安」之間的時間估算。</p>
   <div class="flt"><select id="hy" aria-label="年份">${ys.map(y=>`<option value="${y}" ${y===H.y?'selected':''}>${y} 年</option>`).join('')}</select><select id="hm" aria-label="月份"><option value="0" ${H.m===0?'selected':''}>全年</option>${[...Array(12)].map((_,i)=>`<option value="${i+1}" ${H.m===i+1?'selected':''}>${i+1} 月</option>`).join('')}</select><select id="hg" aria-label="睡眠目標">${[6,6.5,7,7.5,8,8.5,9].map(g=>`<option value="${g}" ${g===S.goal?'selected':''}>目標 ${g}h</option>`).join('')}</select></div>
   <div class="stats"><div class="card stat"><b><span id="k1">0</span><small id="u1">h</small></b><span>平均睡眠</span></div><div class="card stat"><b><span id="k2">0</span><small id="u2">天</small></b><span>打卡天數</span></div><div class="card stat"><b><span id="k3">0</span><small id="u3">%</small></b><span>目標達成率</span></div></div>
   <div class="card"><div class="name">睡眠趨勢</div><div class="hcw" id="hcw"></div></div>
   <div class="card"><div class="bs"><b>${n}</b><span>天連續打卡</span></div><div class="week">${wk}</div><div class="lg">${[['t1','未達標 &lt;6h'],['t2','6h'],['t3','7h'],['t4','8h'],['t5','9h 以上'],['','資料不完整']].map(([c,n])=>`<span><i class="dot ${c}"></i>${n}</span>`).join('')}</div>${pg}</div>
-  <button class="btn" id="addfix" style="width:100%;margin-bottom:14px">＋ 補打卡</button><div id="hl"></div>`;rMagic();hUpdate();const pb_=$('#pgb');if(pb_){pb_.getBoundingClientRect();pb_.style.width=pb_.dataset.w}}
+  <button class="btn" id="addfix" style="width:100%;margin-bottom:14px">＋ 補打卡</button><div id="hl"></div>`;hUpdate();const pb_=$('#pgb');if(pb_){pb_.getBoundingClientRect();pb_.style.width=pb_.dataset.w}}
 $('#hBody').onchange=e=>{const t=e.target;if(t.id==='hy')H.y=+t.value;else if(t.id==='hm')H.m=+t.value;else if(t.id==='hg'){S.goal=+t.value;save();Cloud.pushUser()}else return;hUpdate()};
 let fixO={s:null,w:null};
 const fdt=t=>t?`${dkey(new Date(t))}T${hm(t)}`:'';
@@ -414,10 +434,10 @@ $('#fOk').onclick=()=>{const now=Date.now(),v=[['sleep',fixO.s],['wake',fixO.w]]
   let L=S.log.slice(),ch=false;
   v.forEach(([ty,o],i)=>{const t=T[i];if(o&&(!t||t!==o.ts)){L=L.filter(l=>l.id!==o.id);ch=true}
     if(t&&(!o||t!==o.ts)){const dk=dkey(new Date(t));L=L.filter(l=>!(l.type===ty&&dkey(new Date(l.ts))===dk));L.push({id:now+i,type:ty,ts:t,mid:o?o.mid:null,vid:o?o.vid:null,manual:true});ch=true}});
-  if(ch){S.log=cap(dedupe(L));save();Cloud.pushUser();mgDot();toast('已儲存')}$('#fix').classList.remove('on');rHistory()};
+  if(ch){S.log=cap(dedupe(L));save();Cloud.pushUser();mgDot();memCheck(false);toast('已儲存')}$('#fix').classList.remove('on');rHistory()};
 $('#hBody').onclick=e=>{if(e.target.closest('#wand'))return cast();if(e.target.closest('#gLogin'))return privOpen();if(e.target.closest('#addfix'))return fixOpen(null);const b=e.target.closest('.pb[data-v]');if(b){const v=S.videos.find(x=>x.id===b.dataset.v);return v?play(v):toast('這支影片已被刪除')}const ed=e.target.closest('.ed');if(ed)fixOpen(ed.closest('.rec').dataset.k)};
 document.addEventListener('scroll',e=>{const t=e.target;if(t&&t.classList&&t.classList.contains('view'))$('#acct').classList.toggle('hide',t.scrollTop>12)},true);
-/* ===== 魔法樹 ===== */
+/* ===== 時光樹 ===== */
 const MG={N:50,CAP:9,BLOOM:4},STG=['種子','發芽','小樹','大樹','盛開'],SEAS={spring:'春',summer:'夏',autumn:'秋',winter:'冬'},MISS=new Set();
 const BLOOM_MSG={spring:'樹木已經盛開，櫻花瓣隨風閃閃發亮！',summer:'樹木已經盛開，紫薇的花瓣閃閃發亮！',autumn:'樹木已經盛開，金木犀的小花閃閃發亮，飄來淡淡的香氣！',winter:'樹木披上雪衣，積雪在魔法下閃閃發亮！'};
 const season=()=>{const m=new Date().getMonth()+1;return m>=3&&m<=5?'spring':m>=6&&m<=8?'summer':m>=9&&m<=11?'autumn':'winter'};
@@ -443,15 +463,16 @@ let mgRO=null;
 function fitMg(){const s=$('#mgs');if(!s)return;const k=Math.min((s.clientWidth||300)/664,.62);s.style.setProperty('--k',k.toFixed(4));s.style.height=Math.round(380*k+56)+'px'}
 function rMagic(){const el=$('#magic');if(!el)return;const m=magic(),ok=m>=MG.N,s=stg(),se=season(),bl=s>=MG.BLOOM,tn=bl?'tree-bloom-'+se:['tree-seed','tree-sprout','tree-small','tree-big'][s];
 const say=ok?(bl?'可以抽獎勵了！':'可以施法了！'):`再 ${Math.ceil((MG.N-m)*10)/10}h 就能施法`,nx_=bl?'集滿可抽獎勵':'下一階段：'+STG[s+1];
-el.innerHTML=`<div class="card"><div class="row"><span class="name">魔法樹</span><span class="lv">Lv.${s+1}<b>${STG[s]}${bl?'・'+SEAS[se]:''}</b></span></div>
+el.innerHTML=`<div class="card"><div class="row"><span class="name">時光樹</span><span class="lv">Lv.${s+1}<b>${STG[s]}${bl?'・'+SEAS[se]:''}</b></span></div>
 <div class="pips">${STG.map((n,i)=>(i?`<i class="ln ${i<=s?'d':''}"></i>`:'')+`<div class="pp ${i<s?'d':i===s?'c':''}"><b></b><span>${n}</span></div>`).join('')}</div>
 <div class="mgs" id="mgs" data-s="${se}"><div class="mgt" id="mgt">${art([tn],'tree',s+'|'+se)}</div><div class="mgk" id="mgk">${bearArt('idle')}</div><div class="drops" id="drp"></div><div class="bub" id="bub">${say}</div></div>
 <div class="mgr"><div class="mgp"><div class="t"><span>魔力　${nx_}</span><span>${Math.floor(m*10)/10} / ${MG.N}h</span></div><div class="b ${ok?'ok':''}"><i style="width:${Math.min(100,m/MG.N*100)}%"></i></div></div><button class="wand ${ok?'ok':''}" id="wand" aria-label="${ok?'施展魔法':'魔力不足'}">${art(['wand'],'wand')}</button></div></div>`;
 fitMg();if(window.ResizeObserver){mgRO&&mgRO.disconnect();mgRO=new ResizeObserver(fitMg);mgRO.observe($('#mgs'))}}
-function mgDot(){const b=$('nav [data-v="history"]');b&&b.classList.toggle('mg',(Cloud.off||!!Cloud.user)&&magic()>=MG.N)}
+function mgDot(){const b=$('nav [data-v="time"]');b&&b.classList.toggle('mg',(Cloud.off||!!Cloud.user)&&magic()>=MG.N)}
 function rewards(){const R=EV.rw||[];if(R.length<2)return[];const h=R[0].map(x=>x.trim().toLowerCase()),seen=new Set(),out=[];
 R.slice(1).forEach(r=>{const o={};h.forEach((k,i)=>o[k]=(r[i]||'').trim());if(!o.id||seen.has(o.id)||o.enabled.toUpperCase()==='FALSE'||!['photo','audio','video','text'].includes(o.type))return;if(o.type==='text'?!o.text:!/^https?:\/\//.test(o.url))return;seen.add(o.id);out.push(o)});return out}
-const rwHtml=r=>(r.title?`<p style="color:var(--ink);font:500 15px var(--serif);margin:0 0 10px">${esc(r.title)}</p>`:'')+(r.type==='photo'?`<img src="${esc(r.url)}" alt="" style="width:100%;border-radius:14px;display:block;margin-bottom:10px">`:r.type==='audio'?`<audio controls preload="none" src="${esc(r.url)}" style="width:100%;margin-bottom:10px"></audio>`:r.type==='video'?`<button class="btn dark" id="mgPlay" data-url="${esc(r.url)}" style="width:100%;margin-bottom:10px">播放影片</button>`:'')+(r.text?`<p style="white-space:pre-line;${r.type==='text'?'color:var(--ink)':''}">${esc(r.text)}</p>`:'')+(r.credit?`<p class="hint">來源：${esc(r.credit)}</p>`:'');
+const crHtml=c=>{if(!c)return'';if(/^https?:\/\//.test(c)){let h=c;try{h=new URL(c).hostname.replace(/^www\./,'')}catch(e){}return`<p class="hint">來源：<a href="${esc(c)}" target="_blank" rel="noopener noreferrer">${esc(h)}</a></p>`}return`<p class="hint">來源：${esc(c)}</p>`};
+const rwHtml=r=>(r.title?`<p style="color:var(--ink);font:500 15px var(--serif);margin:0 0 10px">${esc(r.title)}</p>`:'')+(r.type==='photo'?`<img src="${esc(r.url)}" alt="" style="width:100%;border-radius:14px;display:block;margin-bottom:10px">`:r.type==='audio'?`<audio controls preload="none" src="${esc(r.url)}" style="width:100%;margin-bottom:10px"></audio>`:r.type==='video'?`<button class="btn dark" id="mgPlay" data-url="${esc(r.url)}" style="width:100%;margin-bottom:10px">播放影片</button>`:'')+(r.text?`<p style="white-space:pre-line;${r.type==='text'?'color:var(--ink)':''}">${esc(r.text)}</p>`:'')+crHtml(r.credit);
 let mgBusy=false;
 function mgClose(){$('#mgd').classList.remove('on');const a=$('#mgb audio');a&&a.pause();mgBusy=false;const k=$('#mgk');k&&(k.innerHTML=bearArt('idle'));setTimeout(()=>{$('#mgb').innerHTML=''},500)}
 $('#mgOk').onclick=mgClose;$('#mgd').onclick=e=>{if(e.target.id==='mgd')return mgClose();const p=e.target.closest('#mgPlay');if(p){const u=p.dataset.url;mgClose();play({url:u})}};
@@ -461,8 +482,42 @@ const bloom=S.casts>=MG.BLOOM,se=season(),prev=S.casts;let rw=null;
 if(bloom){if(!EV.rwOk)return toast('獎勵載入中，請稍後再試');const P=rewards(),n=S.unlocked.length<500?P.filter(r=>!S.unlocked.includes(r.id)):[],U=P.filter(r=>S.unlocked.includes(r.id)),pk=a=>a[Math.floor(Math.random()*a.length)];rw=n.length?pk(n):U.length?pk(U):null;if(rw&&!S.unlocked.includes(rw.id))S.unlocked.push(rw.id)}
 mgBusy=true;S.casts++;save();Cloud.pushUser();mgDot();const bb=$('#bub');bb&&(bb.style.opacity=0);
 const d=$('#drp'),k=$('#mgk');d&&(d.innerHTML=[...Array(7)].map((_,i)=>`<i style="left:${14+i*11}%;animation-delay:${i*.12}s"></i>`).join(''));k&&(k.innerHTML=bearArt('cast',prev));
-setTimeout(()=>{rMagic();const t=$('#mgt');t&&t.classList.add('pop')},1100);
-setTimeout(()=>{const k2=$('#mgk');k2&&(k2.innerHTML=bearArt('happy'));$('#mgh').textContent=bloom?'魔法樹':'施法成功';$('#mgb').innerHTML=bloom?`<p>${BLOOM_MSG[se]}</p>`+(rw?rwHtml(rw):''):'<p>💦施展了【水水噴】！としくま揮動魔杖灌溉魔法樹，樹木順利長大！</p>';$('#mgd').classList.add('on')},1900)}
+setTimeout(()=>{rMagic();rZukan();const t=$('#mgt');t&&t.classList.add('pop')},1100);
+setTimeout(()=>{const k2=$('#mgk');k2&&(k2.innerHTML=bearArt('happy'));$('#mgh').textContent=bloom?'時光樹':'施法成功';$('#mgb').innerHTML=bloom?`<p>${BLOOM_MSG[se]}</p>`+(rw?rwHtml(rw):''):'<p>💦施展了【水水噴】！熊熊揮動魔杖灌溉時光樹，樹木順利長大！</p>';$('#mgd').classList.add('on')},1900)}
+/* ===== 時光頁與圖鑑 ===== */
+const TGATE=()=>`<h2>時光</h2><p class="sub">登入後，種下屬於你的時光樹。</p><div class="card"><div class="name">登入後開始養成</div><p class="hint" style="margin:12px 0 18px">登入並打卡後，睡眠時數會化為魔力，讓時光樹一路長大。<br>・樹盛開後施法，可以抽到加藤史帆的影音與照片<br>・抽到的獎勵收進圖鑑，隨時重看<br>資料只屬於你，換手機也看得到。</p><button class="btn dark" id="gLogin" style="width:100%">Google 登入</button></div>`;
+const zsv=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const ZI={lock:zsv('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'),photo:zsv('<rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="M4 17l5-4 4 3 3-2 4 3"/>'),audio:zsv('<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>'),video:zsv('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/>'),text:zsv('<path d="M5 7h14M5 12h14M5 17h9"/>')};
+let ZK='reward';
+function rTime(){if(!Cloud.off&&!Cloud.user){$('#tBody').innerHTML=Cloud.ready?TGATE():'<div class="empty">載入中…</div>';return}
+memCheck(false);$('#tBody').innerHTML='<h2>時光</h2><p class="sub">睡得越好，時光樹長得越高。</p><div id="magic"></div><div id="zk"></div>';rMagic();rZukan()}
+const extT=u=>{const p=u.split(/[?#]/)[0].toLowerCase();return/\.(mp4|webm|mov|m4v)$/.test(p)?'video':/\.(jpe?g|png|webp|gif|avif)$/.test(p)?'photo':/\.(mp3|m4a|wav|ogg|aac|flac)$/.test(p)?'audio':''};
+ZI.spark=zsv('<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/>');
+function memPool(){const R=EV.mem||[];if(R.length<2)return[];const h=R[0].map(x=>x.trim().toLowerCase()),seen=new Set(),out=[];
+R.slice(1).forEach(r=>{const o={};h.forEach((k,i)=>o[k]=(r[i]||'').trim());const d=Math.floor(+o.day_n);if(!(d>0)||seen.has(d)||String(o.enabled||'').toUpperCase()==='FALSE'||(!o.title&&!o.text&&!o.media_url))return;
+const u=/^https?:\/\//.test(o.media_url||'')?o.media_url:'';let ty=['photo','audio','video'].includes(o.type)?o.type:'';if(!ty&&u)ty=extT(u);
+seen.add(d);out.push({day:d,date:o.date||'',title:o.title||'',text:(o.text||'').replace(/\[\d+\]/g,''),ty,url:u,credit:o.credit||''})});return out.sort((a,b)=>a.day-b.day)}
+function memCheck(pop){if(!EV.memOk)return null;const P=memPool();if(!P.length)return null;const n=streak().n,U=new Set(S.memories);let hit=null,ch=false;
+P.forEach(c=>{if(c.day>n||U.has(c.day))return;if(pop&&c.day===n)hit=c;S.memories.push(c.day);ch=true});
+if(ch){S.memories=[...new Set(S.memories)].sort((a,b)=>a-b).slice(0,4000);save();Cloud.pushUser()}return hit}
+const memMedia=c=>!c.url?'':c.ty==='photo'?`<img class="mp" src="${esc(c.url)}" alt="" loading="lazy" onerror="this.outerHTML='<p class=hint>圖片無法載入</p>'">`:c.ty==='audio'?`<audio controls preload="none" src="${esc(c.url)}" style="width:100%;margin:6px 0 10px"></audio>`:c.ty==='video'?`<button class="mv" data-u="${esc(c.url)}">${ZI.video}播放影片</button>`:`<p><a href="${esc(c.url)}" target="_blank" rel="noopener noreferrer">開啟連結</a></p>`;
+const memHtml=c=>`<div class="mhd">記憶顯影</div><div class="orn"><i></i>${ZI.spark}<i></i></div><h3>出道第 ${c.day} 天的足跡</h3>${c.date?`<div class="mdt">${esc(c.date)}</div>`:''}${c.title?`<div class="mtt">${esc(c.title)}</div>`:''}${memMedia(c)}${c.text?`<p class="mtx">${esc(c.text)}</p>`:''}${crHtml(c.credit)}`;
+let pendMem=null;
+function memOpen(c,re){$('#memb').innerHTML=memHtml(c);$('#memOk').textContent=re?'關閉':'收進圖鑑';$('#memd').classList.add('on');$('#memd .paper').scrollTop=0}
+function memShow(){if(!pendMem)return;const c=pendMem;pendMem=null;memOpen(c,false);cur==='time'&&rZukan()}
+function memClose(){$('#memd').classList.remove('on');const a=$('#memb audio');a&&a.pause();setTimeout(()=>{$('#memb').innerHTML=''},500)}
+$('#memOk').onclick=memClose;$('#memd').onclick=e=>{if(e.target.id==='memd')return memClose();const v=e.target.closest('.mv');if(v){const u=v.dataset.u;memClose();play({url:u})}};
+addEventListener('keydown',e=>{if(e.key==='Escape')memClose()});
+function rZukan(){const el=$('#zk');if(!el)return;let body='';
+if(ZK==='reward'){if(!EV.rwOk)body='<div class="empty">載入中…</div>';else{const P=rewards(),U=new Set(S.unlocked),n=P.filter(r=>U.has(r.id)).length;
+body=P.length?`<div class="zs"><span>已收集</span><span>${n} / ${P.length}</span></div><div class="zg">${P.map(r=>U.has(r.id)?`<button class="zc" data-r="${esc(r.id)}">${ZI[r.type]}<span>${esc(r.title||'未命名')}</span></button>`:`<div class="zc lk">${ZI.lock}<span>？</span></div>`).join('')}</div>`+(n?'':'<p class="hint" style="margin:12px 0 0">時光樹盛開後，每滿 50h 施法一次，就能抽到一張獎勵。</p>'):'<div class="empty">獎勵還在準備中</div>'}}
+if(ZK==='memory'){if(!EV.memOk)body='<div class="empty">載入中…</div>';else{const P=memPool(),U=new Set(S.memories),n=P.filter(c=>U.has(c.day)).length;
+body=P.length?`<div class="zs"><span>已收集</span><span>${n} / ${P.length}</span></div><div class="zg">${P.map(c=>U.has(c.day)?`<button class="zc" data-m="${c.day}">${ZI[c.ty||'text']}<small>第 ${c.day} 天</small><span>${esc(c.title||'未命名')}</span></button>`:`<div class="zc lk">${ZI.lock}<span>第 ${c.day} 天</span></div>`).join('')}</div>`+(n?'':'<p class="hint" style="margin:12px 0 0">連續打卡到第 N 天，就會收到出道第 N 天的記憶。</p>'):'<div class="empty">記憶還在準備中</div>'}}
+el.innerHTML=`<div class="card"><div class="row"><span class="name">圖鑑</span></div><div class="zt">${[['reward','獎勵',1],['memory','記憶',1],['item','道具',0]].map(([k,n,o])=>`<button data-zk="${k}" class="${k===ZK?'on':''}${o?'':' lk'}">${o?'':ZI.lock}${n}</button>`).join('')}</div>${body}</div>`}
+$('#tBody').onclick=e=>{if(e.target.closest('#wand'))return cast();if(e.target.closest('#gLogin'))return privOpen();
+const z=e.target.closest('[data-zk]');if(z){if(z.classList.contains('lk'))return toast('尚未開放');ZK=z.dataset.zk;return rZukan()}
+const c=e.target.closest('.zc[data-r]');if(c){const r=rewards().find(x=>x.id===c.dataset.r);if(r){$('#mgh').textContent=r.title||'獎勵';$('#mgb').innerHTML=rwHtml(r);$('#mgd').classList.add('on')}}
+const m=e.target.closest('.zc[data-m]');if(m){const x=memPool().find(y=>y.day==m.dataset.m);x&&memOpen(x,true)}};
 /* PWA */
 if('serviceWorker'in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 tick();evShow();loadSheets();setInterval(tick,1000);pill();bgStart();acctRender();mgDot();document.fonts&&document.fonts.ready.then(pill);
@@ -479,16 +534,16 @@ if(C.firebase.apiKey&&!C.firebase.apiKey.startsWith('YOUR')){
   Cloud.logout=()=>signOut(auth);
   let dead=false,tmr=null,last='';
   const fail=e=>{console.warn(e);last='';if(e&&e.code==='resource-exhausted'){if(!dead){dead=true;toast('雲端今日用量已滿，暫時只存在本機')}}else toast('同步失敗，請稍後再試')};
-  Cloud.pushUser=()=>{if(!Cloud.user||dead)return;clearTimeout(tmr);tmr=setTimeout(()=>{const sig=JSON.stringify([S.log.map(l=>l.id),S.off,S.goal,S.casts,S.unlocked,S.base]);if(sig===last)return;last=sig;setDoc(doc(db,'users',Cloud.user.uid),{log:S.log,off:S.off,goal:S.goal,casts:S.casts,unlocked:S.unlocked,base:S.base,t:Date.now()}).catch(fail)},2000)};
+  Cloud.pushUser=()=>{if(!Cloud.user||dead)return;clearTimeout(tmr);tmr=setTimeout(()=>{const sig=JSON.stringify([S.log.map(l=>l.id),S.off,S.goal,S.casts,S.unlocked,S.base,S.memories]);if(sig===last)return;last=sig;setDoc(doc(db,'users',Cloud.user.uid),{log:S.log,off:S.off,goal:S.goal,casts:S.casts,unlocked:S.unlocked,base:S.base,memories:S.memories,t:Date.now()}).catch(fail)},2000)};
   Cloud.pushCfg=()=>{if(Cloud.admin&&!dead)setDoc(doc(db,'config','main'),{members:S.members,videos:S.videos,bgs:S.bgs,events:S.events||[],t:Date.now()}).catch(fail)};
   Cloud.deleteAccount=async()=>{const u=auth.currentUser;if(!u)return;clearTimeout(tmr);
-    try{await deleteDoc(doc(db,'users',u.uid));S.log=[];S.off=[];S.casts=0;S.unlocked=[];S.base=0;save();last='';render();await deleteUser(u);toast('已刪除你的資料與帳號')}
+    try{await deleteDoc(doc(db,'users',u.uid));S.log=[];S.off=[];S.casts=0;S.unlocked=[];S.base=0;S.memories=[];save();last='';render();await deleteUser(u);toast('已刪除你的資料與帳號')}
     catch(e){console.warn(e);toast(e.code==='auth/requires-recent-login'?'雲端紀錄已刪除。請登出後重新登入，再按一次以移除帳號':'刪除失敗：'+(e.code||'請稍後再試'))}};
   const loadCfg=()=>getDoc(doc(db,'config','main')).then(sn=>{if(sn.exists())applyCfg(sn.data())}).catch(e=>console.warn(e));
   const loadUser=()=>Cloud.user&&getDoc(doc(db,'users',Cloud.user.uid)).then(sn=>applyUser(sn.exists()?sn.data():null)).catch(e=>console.warn(e));
   loadCfg();let lt=Date.now();
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&Date.now()-lt>120000){lt=Date.now();loadCfg();loadUser()}});
-  onAuthStateChanged(auth,u=>{if(!u&&Cloud.user){S.log=[];S.off=[];S.casts=0;S.unlocked=[];S.base=0;save();last=''}
+  onAuthStateChanged(auth,u=>{if(!u&&Cloud.user){S.log=[];S.off=[];S.casts=0;S.unlocked=[];S.base=0;S.memories=[];save();last=''}
     Cloud.ready=true;Cloud.user=u;Cloud.admin=!!u&&u.emailVerified===true&&(u.email||'').toLowerCase()===C.adminEmail.toLowerCase();
     onAuth();loadUser()});
 }
