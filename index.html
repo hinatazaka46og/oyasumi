@@ -196,6 +196,7 @@ nav button.mg::after{content:"";position:absolute;top:11px;left:calc(50% + 17px)
 #memd .paper .mv{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:34px 0;border-radius:10px;background:rgba(150,125,80,.14);border:1px solid #D6C8A6;color:#5A5243;margin-bottom:10px}#memd .paper .mv svg{width:20px;height:20px}
 #memd .paper p,#memd .paper .hint{color:#8A7C60}#memd .paper .mtx{color:#5A5243;font-size:12.5px;line-height:1.7;text-align:left;white-space:pre-line;margin:6px 0}
 #memd .paper a{color:#6F6046;text-decoration:underline;text-underline-offset:2px}#memd .paper .btn.dark{background:#3A342A;color:#F1E8D2}
+.zd{font-size:12px;line-height:1.7;color:var(--mute);margin:0 0 12px;min-height:calc(12px*1.7*3)}.zl{height:70px;border-radius:14px;border:1px dashed color-mix(in srgb,var(--mute) 45%,transparent);display:grid;place-items:center;color:var(--mute)}.zl svg{width:22px;height:22px}
 .zc small{font-size:10px;color:var(--mute)}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation:none!important}}
 </style>
@@ -273,9 +274,11 @@ function tick(){const d=new Date();$('#clk').innerHTML=`${pad(d.getHours())}<i s
 let lastD='';
 let EV={ev:[],bd:[],rw:[],rwOk:!ZEN_CONFIG.rewardsCsv,mem:[],memOk:!ZEN_CONFIG.memoryCsv},evL=[],evI=0,evT;
 try{EV=JSON.parse(localStorage.getItem('zen-ev'))||EV}catch(e){}
-const parseCsv=t=>{const R=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const h=t[i];if(q){if(h==='"'){if(t[i+1]==='"'){c+='"';i++}else q=false}else c+=h}else if(h==='"')q=true;else if(h===','){r.push(c);c=''}else if(h==='\n'||h==='\r'){if(h==='\r'&&t[i+1]==='\n')i++;r.push(c);c='';R.push(r);r=[]}else c+=h}if(c||r.length){r.push(c);R.push(r)}
-  return R.slice(1).filter(x=>x.length>=4&&+x[0]>0).map(x=>({m:+x[0],d:+x[1],n:x[2].trim(),y:+x[3]}))};
-async function loadSheets(){await Promise.all([['ev',ZEN_CONFIG.eventsCsv],['bd',ZEN_CONFIG.birthdaysCsv],['rw',ZEN_CONFIG.rewardsCsv],['mem',ZEN_CONFIG.memoryCsv]].map(async([k,u])=>{if(!u)return;try{const r=await fetch(u);if(!r.ok)return;EV[k]=parseCsv(await r.text());if(k==='rw')EV.rwOk=true;if(k==='mem'){EV.memOk=true;memCheck(false)}if(cur==='time')rZukan()}catch(e){console.warn(e)}}));
+const csvRows=t=>{const R=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const h=t[i];if(q){if(h==='"'){if(t[i+1]==='"'){c+='"';i++}else q=false}else c+=h}else if(h==='"')q=true;else if(h===','){r.push(c);c=''}else if(h==='\n'||h==='\r'){if(h==='\r'&&t[i+1]==='\n')i++;r.push(c);c='';R.push(r);r=[]}else c+=h}if(c||r.length){r.push(c);R.push(r)}
+  return R};
+const parseCsv=t=>csvRows(t).slice(1).filter(x=>x.length>=4&&+x[0]>0).map(x=>({m:+x[0],d:+x[1],n:x[2].trim(),y:+x[3]}));
+const SF={};
+async function loadSheets(){await Promise.all([['ev',ZEN_CONFIG.eventsCsv],['bd',ZEN_CONFIG.birthdaysCsv],['rw',ZEN_CONFIG.rewardsCsv],['mem',ZEN_CONFIG.memoryCsv]].map(async([k,u])=>{if(!u)return;try{const r=await fetch(u);if(!r.ok)return;const tx=await r.text();EV[k]=(k==='rw'||k==='mem')?csvRows(tx):parseCsv(tx);SF[k]=1;if(k==='rw')EV.rwOk=true;if(k==='mem'){EV.memOk=true;memCheck(false)}if(cur==='time')rZukan()}catch(e){console.warn(e)}}));
   try{localStorage.setItem('zen-ev',JSON.stringify(EV))}catch(e){}evShow()}
 function evSet(L){const e=$('#ev');if(JSON.stringify(L)===JSON.stringify(evL))return;evL=L;evI=0;clearInterval(evT);e.style.opacity=1;e.textContent=L[0]||'';
   if(L.length>1)evT=setInterval(()=>{e.style.opacity=0;setTimeout(()=>{evI=(evI+1)%evL.length;e.textContent=evL[evI];e.style.opacity=1},450)},4500)}
@@ -469,7 +472,7 @@ el.innerHTML=`<div class="card"><div class="row"><span class="name">時光樹</s
 <div class="mgr"><div class="mgp"><div class="t"><span>魔力　${nx_}</span><span>${Math.floor(m*10)/10} / ${MG.N}h</span></div><div class="b ${ok?'ok':''}"><i style="width:${Math.min(100,m/MG.N*100)}%"></i></div></div><button class="wand ${ok?'ok':''}" id="wand" aria-label="${ok?'施展魔法':'魔力不足'}">${art(['wand'],'wand')}</button></div></div>`;
 fitMg();if(window.ResizeObserver){mgRO&&mgRO.disconnect();mgRO=new ResizeObserver(fitMg);mgRO.observe($('#mgs'))}}
 function mgDot(){const b=$('nav [data-v="time"]');b&&b.classList.toggle('mg',(Cloud.off||!!Cloud.user)&&magic()>=MG.N)}
-function rewards(){const R=EV.rw||[];if(R.length<2)return[];const h=R[0].map(x=>x.trim().toLowerCase()),seen=new Set(),out=[];
+function rewards(){const R=EV.rw||[];if(R.length<2||!Array.isArray(R[0]))return[];const h=R[0].map(x=>x.trim().toLowerCase()),seen=new Set(),out=[];
 R.slice(1).forEach(r=>{const o={};h.forEach((k,i)=>o[k]=(r[i]||'').trim());if(!o.id||seen.has(o.id)||o.enabled.toUpperCase()==='FALSE'||!['photo','audio','video','text'].includes(o.type))return;if(o.type==='text'?!o.text:!/^https?:\/\//.test(o.url))return;seen.add(o.id);out.push(o)});return out}
 const crHtml=c=>{if(!c)return'';if(/^https?:\/\//.test(c)){let h=c;try{h=new URL(c).hostname.replace(/^www\./,'')}catch(e){}return`<p class="hint">來源：<a href="${esc(c)}" target="_blank" rel="noopener noreferrer">${esc(h)}</a></p>`}return`<p class="hint">來源：${esc(c)}</p>`};
 const rwHtml=r=>(r.title?`<p style="color:var(--ink);font:500 15px var(--serif);margin:0 0 10px">${esc(r.title)}</p>`:'')+(r.type==='photo'?`<img src="${esc(r.url)}" alt="" style="width:100%;border-radius:14px;display:block;margin-bottom:10px">`:r.type==='audio'?`<audio controls preload="none" src="${esc(r.url)}" style="width:100%;margin-bottom:10px"></audio>`:r.type==='video'?`<button class="btn dark" id="mgPlay" data-url="${esc(r.url)}" style="width:100%;margin-bottom:10px">播放影片</button>`:'')+(r.text?`<p style="white-space:pre-line;${r.type==='text'?'color:var(--ink)':''}">${esc(r.text)}</p>`:'')+crHtml(r.credit);
@@ -493,7 +496,7 @@ function rTime(){if(!Cloud.off&&!Cloud.user){$('#tBody').innerHTML=Cloud.ready?T
 memCheck(false);$('#tBody').innerHTML='<h2>時光</h2><p class="sub">睡得越好，時光樹長得越高。</p><div id="magic"></div><div id="zk"></div>';rMagic();rZukan()}
 const extT=u=>{const p=u.split(/[?#]/)[0].toLowerCase();return/\.(mp4|webm|mov|m4v)$/.test(p)?'video':/\.(jpe?g|png|webp|gif|avif)$/.test(p)?'photo':/\.(mp3|m4a|wav|ogg|aac|flac)$/.test(p)?'audio':''};
 ZI.spark=zsv('<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/>');
-function memPool(){const R=EV.mem||[];if(R.length<2)return[];const h=R[0].map(x=>x.trim().toLowerCase()),seen=new Set(),out=[];
+function memPool(){const R=EV.mem||[];if(R.length<2||!Array.isArray(R[0]))return[];const h=R[0].map(x=>x.trim().toLowerCase()),seen=new Set(),out=[];
 R.slice(1).forEach(r=>{const o={};h.forEach((k,i)=>o[k]=(r[i]||'').trim());const d=Math.floor(+o.day_n);if(!(d>0)||seen.has(d)||String(o.enabled||'').toUpperCase()==='FALSE'||(!o.title&&!o.text&&!o.media_url))return;
 const u=/^https?:\/\//.test(o.media_url||'')?o.media_url:'';let ty=['photo','audio','video'].includes(o.type)?o.type:'';if(!ty&&u)ty=extT(u);
 seen.add(d);out.push({day:d,date:o.date||'',title:o.title||'',text:(o.text||'').replace(/\[\d+\]/g,''),ty,url:u,credit:o.credit||''})});return out.sort((a,b)=>a.day-b.day)}
@@ -508,14 +511,16 @@ function memShow(){if(!pendMem)return;const c=pendMem;pendMem=null;memOpen(c,fal
 function memClose(){$('#memd').classList.remove('on');const a=$('#memb audio');a&&a.pause();setTimeout(()=>{$('#memb').innerHTML=''},500)}
 $('#memOk').onclick=memClose;$('#memd').onclick=e=>{if(e.target.id==='memd')return memClose();const v=e.target.closest('.mv');if(v){const u=v.dataset.u;memClose();play({url:u})}};
 addEventListener('keydown',e=>{if(e.key==='Escape')memClose()});
+const ZD={reward:'時光樹盛開後，魔力每滿 50h 施法一次，就能抽到隨機卡片。',memory:'連續打卡天數與平假名櫸/日向坂結成天數同步時，就會收到記憶卡片，重溫她們一路走來的足跡。',item:'解鎖連續打卡成就，收集各式布景與配飾來裝扮畫面。（即將開放）'};
 function rZukan(){const el=$('#zk');if(!el)return;let body='';
-if(ZK==='reward'){if(!EV.rwOk)body='<div class="empty">載入中…</div>';else{const P=rewards(),U=new Set(S.unlocked),n=P.filter(r=>U.has(r.id)).length;
-body=P.length?`<div class="zs"><span>已收集</span><span>${n} / ${P.length}</span></div><div class="zg">${P.map(r=>U.has(r.id)?`<button class="zc" data-r="${esc(r.id)}">${ZI[r.type]}<span>${esc(r.title||'未命名')}</span></button>`:`<div class="zc lk">${ZI.lock}<span>？</span></div>`).join('')}</div>`+(n?'':'<p class="hint" style="margin:12px 0 0">時光樹盛開後，每滿 50h 施法一次，就能抽到一張獎勵。</p>'):'<div class="empty">獎勵還在準備中</div>'}}
-if(ZK==='memory'){if(!EV.memOk)body='<div class="empty">載入中…</div>';else{const P=memPool(),U=new Set(S.memories),n=P.filter(c=>U.has(c.day)).length;
-body=P.length?`<div class="zs"><span>已收集</span><span>${n} / ${P.length}</span></div><div class="zg">${P.map(c=>U.has(c.day)?`<button class="zc" data-m="${c.day}">${ZI[c.ty||'text']}<small>第 ${c.day} 天</small><span>${esc(c.title||'未命名')}</span></button>`:`<div class="zc lk">${ZI.lock}<span>第 ${c.day} 天</span></div>`).join('')}</div>`+(n?'':'<p class="hint" style="margin:12px 0 0">連續打卡到第 N 天，就會收到出道第 N 天的記憶。</p>'):'<div class="empty">記憶還在準備中</div>'}}
-el.innerHTML=`<div class="card"><div class="row"><span class="name">圖鑑</span></div><div class="zt">${[['reward','獎勵',1],['memory','記憶',1],['item','道具',0]].map(([k,n,o])=>`<button data-zk="${k}" class="${k===ZK?'on':''}${o?'':' lk'}">${o?'':ZI.lock}${n}</button>`).join('')}</div>${body}</div>`}
+if(ZK==='reward'){const P=rewards();if(!EV.rwOk||(!P.length&&!SF.rw))body='<div class="empty">載入中…</div>';else{const U=new Set(S.unlocked),n=P.filter(r=>U.has(r.id)).length;
+body=P.length?`<div class="zs"><span>已收集</span><span>${n} / ${P.length}</span></div><div class="zg">${P.map(r=>U.has(r.id)?`<button class="zc" data-r="${esc(r.id)}">${ZI[r.type]}<span>${esc(r.title||'未命名')}</span></button>`:`<div class="zc lk">${ZI.lock}<span>？</span></div>`).join('')}</div>`:'<div class="empty">目前沒有可收集的獎勵</div>'}}
+if(ZK==='memory'){const P=memPool();if(!EV.memOk||(!P.length&&!SF.mem))body='<div class="empty">載入中…</div>';else{const U=new Set(S.memories),n=P.filter(c=>U.has(c.day)).length;
+body=P.length?`<div class="zs"><span>已收集</span><span>${n} / ${P.length}</span></div><div class="zg">${P.map(c=>U.has(c.day)?`<button class="zc" data-m="${c.day}">${ZI[c.ty||'text']}<small>第 ${c.day} 天</small><span>${esc(c.title||'未命名')}</span></button>`:`<div class="zc lk">${ZI.lock}<span>第 ${c.day} 天</span></div>`).join('')}</div>`:'<div class="empty">目前沒有可收集的記憶</div>'}}
+if(ZK==='item')body=`<div class="zl">${ZI.lock}</div>`;
+el.innerHTML=`<div class="card"><div class="row"><span class="name">圖鑑</span></div><div class="zt">${[['reward','獎勵',1],['memory','記憶',1],['item','道具',0]].map(([k,n,o])=>`<button data-zk="${k}" class="${k===ZK?'on':''}${o?'':' lk'}">${o?'':ZI.lock}${n}</button>`).join('')}</div><p class="zd">${ZD[ZK]}</p>${body}</div>`}
 $('#tBody').onclick=e=>{if(e.target.closest('#wand'))return cast();if(e.target.closest('#gLogin'))return privOpen();
-const z=e.target.closest('[data-zk]');if(z){if(z.classList.contains('lk'))return toast('尚未開放');ZK=z.dataset.zk;return rZukan()}
+const z=e.target.closest('[data-zk]');if(z){ZK=z.dataset.zk;return rZukan()}
 const c=e.target.closest('.zc[data-r]');if(c){const r=rewards().find(x=>x.id===c.dataset.r);if(r){$('#mgh').textContent=r.title||'獎勵';$('#mgb').innerHTML=rwHtml(r);$('#mgd').classList.add('on')}}
 const m=e.target.closest('.zc[data-m]');if(m){const x=memPool().find(y=>y.day==m.dataset.m);x&&memOpen(x,true)}};
 /* PWA */
